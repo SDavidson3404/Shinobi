@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ljidd2wg1yg2"]
+
+[sub_resource type="Gradient" id="Gradient_opryo"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_opwag"]
+gradient = SubResource("Gradient_opryo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_opryo"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.999726, 0.9972369, 1.540184e-06, 1)
+color_ramp = SubResource("GradientTexture1D_opwag")
+anim_speed_min = 1.52
+anim_speed_max = 1.52
+
+[sub_resource type="BoxMesh" id="BoxMesh_opryo"]
+size = Vector3(0.05, 0.02, 0.02)
+
+[sub_resource type="Skin" id="Skin_opwag"]
+
+[node name="HitParticles" type="GPUParticles3D"]
+emitting = false
+lifetime = 0.32
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_opryo")
+draw_pass_1 = SubResource("BoxMesh_opryo")
+draw_skin = SubResource("Skin_opwag")

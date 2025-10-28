@@ -234,7 +234,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 scale = Vector2(4, 4)
 text = "Collect The Orbs To
-Increase Your Potecy
+Increase Your Potency
 To The Limit!"
 label_settings = SubResource("LabelSettings_7n6eb")
 
@@ -296,21 +296,21 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.054753825, 0.75, -79.
 [node name="Collectibles" type="Node" parent="."]
 
 [node name="collectible" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.2025616, 13.614138, -102.480316)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.2025616, 12.808117, -102.480316)
 
 [node name="collectible2" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.2025616, 13.614138, -98.04002)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.2025616, 12.808117, -98.04002)
 
 [node name="collectible3" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6466749, 13.614138, -101.348114)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6466749, 12.808117, -101.348114)
 
 [node name="collectible4" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5744288, 13.614138, -99.21005)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5744288, 12.808117, -99.21005)
 
 [node name="collectible5" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6903327, 13.614138, -99.12161)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6903327, 12.808117, -99.12161)
 
 [node name="collectible6" parent="Collectibles" instance=ExtResource("5_hu44a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.677316, 13.614138, -101.1107)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.677316, 12.808117, -101.1107)
 
 [connection signal="enemyKilled" from="Enemies/enemy" to="Platforms/CSGBox3D10" method="_on_enemy_enemy_killed"]

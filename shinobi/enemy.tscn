@@ -1,16 +1,88 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4agx32tn4sc1"]
+[gd_scene load_steps=8 format=3 uid="uid://c4agx32tn4sc1"]
 
 [ext_resource type="Script" uid="uid://l7t48k8jr0ns" path="res://enemy.gd" id="1_7k104"]
+[ext_resource type="PackedScene" uid="uid://dajmdap35dg88" path="res://enemy_sword.tscn" id="2_4gyqm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4gyqm"]
+
+[sub_resource type="Animation" id="Animation_4gyqm"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.8928443, 0, -0.69087255), Vector3(-0.8928443, 0.6275271, -0.108849406), Vector3(0.24090612, -0.07208705, -1.1439571)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.6333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.260023, -3.0495265, 0), Vector3(0.3791667, -3.111325, -0.076472685), Vector3(1.0983698, -0.8428731, 2.9988496)]
+}
+
+[sub_resource type="Animation" id="Animation_qi2p4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.8928443, 0, -0.69087255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.260023, -3.0495265, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iifgy"]
+_data = {
+&"RESET": SubResource("Animation_qi2p4"),
+&"attack": SubResource("Animation_4gyqm")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qi2p4"]
 
 [node name="enemy" type="CharacterBody3D"]
 script = ExtResource("1_7k104")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Orientation" type="Node3D" parent="."]
+
+[node name="Skeleton" type="MeshInstance3D" parent="Orientation"]
 mesh = SubResource("CapsuleMesh_4gyqm")
+skeleton = NodePath("../..")
+
+[node name="EnemySword" parent="Orientation/Skeleton" instance=ExtResource("2_4gyqm")]
+transform = Transform3D(-0.99576473, -0.08753221, -0.02811363, 0, 0.305795, -0.95209736, 0.09193618, -0.94806516, -0.30449995, -0.8928443, 0, -0.69087255)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iifgy")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_qi2p4")

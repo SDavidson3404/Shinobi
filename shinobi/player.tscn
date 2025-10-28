@@ -1,10 +1,12 @@
-[gd_scene load_steps=30 format=3 uid="uid://cvjeo6jpukr3s"]
+[gd_scene load_steps=33 format=3 uid="uid://cvjeo6jpukr3s"]
 
 [ext_resource type="Script" uid="uid://bf605vrowvkit" path="res://character_body_3d.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://drpv24ht71em8" path="res://sword.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://r313xctl4x75" path="res://spear.tscn" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://bp447q6yytmcb" path="res://spear.gd" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://dbsga1xteuqqd" path="res://potency.gd" id="5_2hs0m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqtel"]
 albedo_color = Color(4.042983e-06, 0.5359795, 0.8093552, 1)
@@ -22,7 +24,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.29, 0.5, 0.72, 0.96, 1.02, 1.05, 1.12, 1.2666667),
+"times": PackedFloat32Array(0, 0.16666667, 0.36666667, 0.6333333, 0.8333333, 0.9, 0.93333334, 1, 1.1333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.5903817, 0.1833002, -0.39630628), Vector3(0.5903817, 0.83539903, -0.22777116), Vector3(0.5903817, 1.3076086, 0.31045604), Vector3(0.5903817, 1.0805537, 0.8945488), Vector3(0.5903817, 0.6295727, 0.96067727), Vector3(0.51432323, 0.5252171, 0.21157247), Vector3(0.47629407, 0.4730394, -0.1629796), Vector3(0.38755918, 0.35129115, -1.0369357), Vector3(-0.88449836, 0.09619981, -0.9021647)]
@@ -34,7 +36,7 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.29, 0.5, 0.72, 0.96, 1.02, 1.05, 1.12, 1.2666667),
+"times": PackedFloat32Array(0, 0.16666667, 0.36666667, 0.6333333, 0.8333333, 0.9, 0.93333334, 1, 1.1333333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.040742334, 1.4401798, -0.74519384), Vector3(0.010914319, 1.4922873, -0.08559234), Vector3(0.048320867, 1.5300202, 0.39205012), Vector3(0.087508686, 1.5695499, 0.8924376), Vector3(0.13025899, 1.6126733, 1.4383147), Vector3(0.13025899, 2.0314913, 1.4383146), Vector3(0.13025899, -3.069228, 1.4383146), Vector3(0.13025902, -1.5817051, 1.4383146), Vector3(0.13025899, -0.94070834, 1.4383146)]
@@ -768,12 +770,47 @@ _data = {
 &"swing3": SubResource("Animation_b26j0")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+[sub_resource type="Animation" id="Animation_5tmop"]
+resource_name = "dodge_roll"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.059674498, 0.11657344, 0.18041128),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5707964, 0, 0), Vector3(3.1415925, 0, 0), Vector3(-2.3841858e-07, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7ahtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ahtn"]
+_data = {
+&"RESET": SubResource("Animation_7ahtn"),
+&"dodge_roll": SubResource("Animation_5tmop")
+}
 
 [node name="Player" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4901161e-08)
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, -1.4901161e-08)
 script = ExtResource("1_4flbx")
 
 [node name="CameraPivot" type="Node3D" parent="Player"]
@@ -786,39 +823,46 @@ spring_length = 3.0
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.9855383, -0.16945274, 0, 0.16945274, 0.9855383, 0, -8.940697e-08, 3)
 
-[node name="aspects" type="Node3D" parent="Player"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/aspects"]
-mesh = SubResource("CapsuleMesh_4flbx")
-skeleton = NodePath("../..")
-
-[node name="Weapon holster" type="Node3D" parent="Player/aspects"]
-
-[node name="Sword" parent="Player/aspects/Weapon holster" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.1231095, 0.03731598, 0.990658, -0.67755014, 0.4673009, 0.040731024, -0.725097, -0.43032292, 0.13013719, 0.5903817, 0.1833002, -0.39630628)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/aspects/Weapon holster/Sword"]
-libraries = {
-&"": SubResource("AnimationLibrary_hqtel")
-}
-
-[node name="Spear" parent="Player/aspects/Weapon holster" instance=ExtResource("3_i3pqv")]
-transform = Transform3D(1, 0, 0, 0, 0.282662, 0.98199785, 0, -1.4695002, 0.18888974, 0.5447607, 0, -0.5725565)
-script = ExtResource("4_hqtel")
-knockback_strength = 5
-damage = 10
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/aspects/Weapon holster/Spear"]
-libraries = {
-&"": SubResource("AnimationLibrary_nvl01")
-}
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="RayCast3D" type="RayCast3D" parent="Player"]
 
 [node name="RopeMesh" type="MeshInstance3D" parent="Player"]
+
+[node name="Orientation" type="Node3D" parent="Player"]
+
+[node name="aspects" type="Node3D" parent="Player/Orientation"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Orientation/aspects"]
+mesh = SubResource("CapsuleMesh_4flbx")
+skeleton = NodePath("../../..")
+
+[node name="Weapon holster" type="Node3D" parent="Player/Orientation/aspects"]
+
+[node name="Sword" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("2_onrkg")]
+transform = Transform3D(0.1231095, 0.03731598, 0.990658, -0.67755014, 0.4673009, 0.040731024, -0.725097, -0.43032292, 0.13013719, 0.5903817, 0.1833002, -0.39630628)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects/Weapon holster/Sword"]
+libraries = {
+&"": SubResource("AnimationLibrary_hqtel")
+}
+
+[node name="Spear" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("3_i3pqv")]
+transform = Transform3D(1, 0, 0, 0, 0.282662, 0.9819977, 0, -1.4695002, 0.18888971, 0.5447607, 0, -0.5725565)
+script = ExtResource("4_hqtel")
+knockback_strength = 5
+damage = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects/Weapon holster/Spear"]
+libraries = {
+&"": SubResource("AnimationLibrary_nvl01")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects"]
+libraries = {
+&"": SubResource("AnimationLibrary_7ahtn")
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 

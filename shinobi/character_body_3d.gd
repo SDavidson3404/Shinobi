@@ -2,27 +2,37 @@ extends CharacterBody3D
 class_name Player
 
 # ========================
+# NODES
+# ========================
+@onready var orientation: Node3D = $Orientation
+@onready var aspects: Node3D = $Orientation/aspects
+@onready var anim_player: AnimationPlayer = $Orientation/aspects/AnimationPlayer
+@onready var camera_pivot: Node3D = $CameraPivot
+@onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
+@onready var rope_mesh: MeshInstance3D = $RopeMesh
+@onready var grapple_ray: RayCast3D = $RayCast3D
+@onready var weapon_holster: Node3D = $"Orientation/aspects/Weapon holster"
+@onready var stamina_bar: ProgressBar = $"../UI/StaminaBar"
+@onready var healthbar: ProgressBar = $"../UI/Healthbar"
+
+# ========================
 # MOVEMENT
 # ========================
-@export var SPEED: float = 10.0
+@export var SPEED: float = 7.0
 @export var JUMP_VELOCITY: float = 10.0
+var input_vector: Vector2 = Vector2.ZERO
 var knockback_velocity: Vector3 = Vector3.ZERO
 var knockback_decay: float = 10.0
-var input_vector: Vector2 = Vector2.ZERO
 
 # ========================
 # CAMERA
 # ========================
-@onready var _camera_pivot: Node3D = $CameraPivot
-@onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 @export_range(0.0, 1.0) var mouse_sensitivity: float = 0.01
 @export var tilt_limit: float = deg_to_rad(75)
 
 # ========================
 # WEAPON
 # ========================
-@onready var aspects: Node3D = $aspects
-@onready var weapon_holster: Node3D = $"aspects/Weapon holster"
 var weapons: Array[Node3D] = []
 var current_weapon_index: int = 0
 var current_weapon: Node3D = null
@@ -30,16 +40,14 @@ var current_weapon: Node3D = null
 # ========================
 # GRAPPLE
 # ========================
-@onready var rope_mesh: MeshInstance3D = $RopeMesh
-@onready var grapple_ray: RayCast3D = $RayCast3D
 @export var grapple_speed: float = 25.0
-@export var max_grapple_distance: float = 30.0
+@export var max_grapple_distance: float = 15.0
 @export var grapple_stop_distance: float = 3.0
 @export var grapple_cooldown: float = 1.0
 @export var grapple_stamina_cost: float = 50.0
 var is_grappling: bool = false
 var grapple_point: Vector3
-var grapple_timer: float = 0.0
+var _rope_material: StandardMaterial3D = null
 
 # ========================
 # STAMINA
@@ -49,14 +57,27 @@ var current_stamina: float = max_stamina
 @export var stamina_recharge_rate: float = 15.0
 @export var stamina_recharge_delay: float = 0.5
 var stamina_recharge_timer: float = 0.0
-@onready var stamina_bar: ProgressBar = $"../UI/StaminaBar"
 
 # ========================
 # HEALTH
 # ========================
 @export var max_health: int = 100
 var health: int = max_health
-@onready var healthbar: ProgressBar = $"../UI/Healthbar"
+
+# ========================
+# DODGE
+# ========================
+@export var dodge_speed: float = 35.0
+@export var dodge_duration: float = 0.10
+@export var dodge_cooldown: float = 0.6
+@export var dodge_stamina_cost: float = 25.0
+@export var dodge_invincibility_time: float = 0.2
+var is_dodging: bool = false
+var dodge_timer: float = 0.0
+var dodge_cooldown_timer: float = 0.0
+var dodge_direction: Vector3 = Vector3.ZERO
+var invulnerable: bool = false
+var invuln_timer: float = 0.0
 
 # ========================
 # READY
@@ -75,7 +96,6 @@ func _ready() -> void:
 		current_weapon_index = 0
 		current_weapon = weapons[current_weapon_index]
 		current_weapon.visible = true
-		
 
 # ========================
 # INPUT
@@ -85,22 +105,21 @@ func _input(event):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_pressed("click") and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 	if event.is_action_pressed("Weapon Swap"):
 		swap_weapon()
-
 	if event.is_action_pressed("grapple"):
 		try_grapple()
-
 	if Input.is_action_just_pressed("click") and current_weapon:
 		current_weapon.attack(false)
 	if Input.is_action_just_pressed("heavy_attack") and current_weapon:
 		current_weapon.attack(true)
+	if event.is_action_pressed("dodge"):
+		try_dodge()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		_camera_pivot.rotation.x = clampf(_camera_pivot.rotation.x - event.relative.y * mouse_sensitivity, -tilt_limit, tilt_limit)
-		_camera_pivot.rotation.y -= event.relative.x * mouse_sensitivity
+		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x - event.relative.y * mouse_sensitivity, -tilt_limit, tilt_limit)
+		camera_pivot.rotation.y -= event.relative.x * mouse_sensitivity
 
 # ========================
 # PHYSICS
@@ -108,9 +127,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	handle_grapple(delta)
+	handle_dodge(delta)
 	move_and_slide()
 
-	# Recharge stamina
+	# Stamina recharge
 	if stamina_recharge_timer > 0.0:
 		stamina_recharge_timer -= delta
 	else:
@@ -118,11 +138,21 @@ func _physics_process(delta: float) -> void:
 	if stamina_bar:
 		stamina_bar.value = current_stamina
 
+	# Cooldowns
+	if dodge_cooldown_timer > 0.0:
+		dodge_cooldown_timer -= delta
+
+	# Invulnerability timer
+	if invulnerable:
+		invuln_timer -= delta
+		if invuln_timer <= 0.0:
+			invulnerable = false
+
 # ========================
 # MOVEMENT
 # ========================
 func handle_movement(delta: float) -> void:
-	if is_grappling:
+	if is_dodging or is_grappling:
 		return
 
 	input_vector = Vector2(
@@ -130,22 +160,21 @@ func handle_movement(delta: float) -> void:
 		Input.get_action_strength("W") - Input.get_action_strength("S")
 	)
 
-	var move_direction: Vector3 = Vector3.ZERO
+	var move_dir: Vector3 = Vector3.ZERO
 	if input_vector != Vector2.ZERO:
-		var camera_basis = camera.global_transform.basis
-		var forward = -camera_basis.z
-		forward.y = 0
-		forward = forward.normalized()
-		var right = camera_basis.x
-		right.y = 0
-		right = right.normalized()
-		move_direction = (input_vector.x * right + input_vector.y * forward).normalized()
+		var cam_basis = camera.global_transform.basis
+		var forward = -cam_basis.z; forward.y = 0; forward = forward.normalized()
+		var right = cam_basis.x; right.y = 0; right = right.normalized()
+		move_dir = (input_vector.x * right + input_vector.y * forward).normalized()
 
-		velocity.x = move_direction.x * SPEED
-		velocity.z = move_direction.z * SPEED
+		velocity.x = move_dir.x * SPEED
+		velocity.z = move_dir.z * SPEED
 
-		var target_rotation = atan2(-move_direction.x, -move_direction.z)
-		aspects.rotation.y = lerp_angle(aspects.rotation.y, target_rotation, delta * 10.0)
+		if move_dir.length() > 0.01:
+			var target_yaw = atan2(-move_dir.x, -move_dir.z)
+			var current_yaw = orientation.rotation.y
+			orientation.rotation.y = lerp_angle(current_yaw, target_yaw, delta * 10.0)  # adjust 10.0 for snappiness
+
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta * 5)
 		velocity.z = move_toward(velocity.z, 0, SPEED * delta * 5)
@@ -167,25 +196,17 @@ func handle_movement(delta: float) -> void:
 func handle_grapple(delta: float) -> void:
 	if not is_grappling:
 		return
-
 	var to_target = grapple_point - global_transform.origin
-	var distance = to_target.length()
-
-	if distance > grapple_stop_distance:
-		var dir = to_target.normalized()
-		velocity = velocity.lerp(dir * grapple_speed, delta * 8.0)
+	if to_target.length() > grapple_stop_distance:
+		velocity = velocity.lerp(to_target.normalized() * grapple_speed, delta * 8.0)
 		update_rope()
 	else:
 		cancel_grapple()
 
 func try_grapple() -> void:
 	if is_grappling:
-		cancel_grapple()
-		return
-
-	# Check stamina
+		cancel_grapple(); return
 	if current_stamina < grapple_stamina_cost:
-		print("Not enough stamina to grapple!")
 		return
 
 	var space_state = get_world_3d().direct_space_state
@@ -201,34 +222,29 @@ func try_grapple() -> void:
 	if result and result.has("position"):
 		grapple_point = result["position"]
 		is_grappling = true
-
-		# Deduct stamina and delay regeneration
-		current_stamina = max(current_stamina - grapple_stamina_cost, 0)
+		current_stamina -= grapple_stamina_cost
 		stamina_recharge_timer = stamina_recharge_delay
-
-		print("Grapple start:", grapple_point)
-	else:
-		print("No grapple target")
-
 
 func update_rope() -> void:
 	if not is_grappling:
-		rope_mesh.visible = false
+		if rope_mesh: rope_mesh.visible = false
 		return
-	var start = camera.global_position
-	var end = grapple_point
-	var verts = PackedVector3Array([start, end])
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = verts
+	if not rope_mesh: return
+
+	var verts = PackedVector3Array([camera.global_position, grapple_point])
+	var arrays = []; arrays.resize(Mesh.ARRAY_MAX); arrays[Mesh.ARRAY_VERTEX] = verts
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
-	if rope_mesh.mesh == null:
-		var mat = StandardMaterial3D.new()
-		mat.unshaded = true
-		mat.albedo_color = Color(0.2, 1.0, 0.8)
-		rope_mesh.set_surface_override_material(0, mat)
 	rope_mesh.mesh = mesh
+
+	if _rope_material == null:
+		_rope_material = StandardMaterial3D.new()
+		_rope_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		_rope_material.albedo_color = Color(0.2, 1.0, 0.8)
+		_rope_material.metallic = 0
+		_rope_material.roughness = 1
+	if rope_mesh.mesh and rope_mesh.mesh.get_surface_count() > 0:
+		rope_mesh.set_surface_override_material(0, _rope_material)
 	rope_mesh.visible = true
 
 func cancel_grapple() -> void:
@@ -236,24 +252,80 @@ func cancel_grapple() -> void:
 	rope_mesh.visible = false
 
 # ========================
+# DODGE
+# ========================
+func try_dodge() -> void:
+	print("Trying dodge")  # Debug line
+	if is_dodging or is_grappling or dodge_cooldown_timer > 0 or current_stamina < dodge_stamina_cost:
+		return
+
+	var input_dir = Vector2(
+		Input.get_action_strength("D") - Input.get_action_strength("A"),
+		Input.get_action_strength("W") - Input.get_action_strength("S")
+	)
+	var cam_basis = camera.global_transform.basis
+	var forward = -cam_basis.z; forward.y = 0
+	var right = cam_basis.x; right.y = 0
+
+	dodge_direction = ( (input_dir.x * right + input_dir.y * forward).normalized() 
+						if input_dir.length() > 0.1 else -forward.normalized() )
+
+	is_dodging = true
+	dodge_timer = dodge_duration
+	dodge_cooldown_timer = dodge_cooldown
+	current_stamina -= dodge_stamina_cost
+	stamina_recharge_timer = stamina_recharge_delay
+
+	if anim_player and anim_player.has_animation("dodge_roll"):
+		anim_player.play("dodge_roll")
+
+	invulnerable = true
+	invuln_timer = dodge_invincibility_time
+
+func handle_dodge(delta: float) -> void:
+	if not is_dodging:
+		return
+
+	# Rotate orientation without tilting mesh
+	orientation.rotation.x = 0
+	orientation.rotation.z = 0
+	
+	var hor_dir = dodge_direction
+	hor_dir.y = 0
+	velocity = hor_dir.normalized() * dodge_speed
+
+# Smooth rotation while dodging
+	if hor_dir.length() > 0.01:
+		var target_yaw = atan2(-hor_dir.x, -hor_dir.z)
+		orientation.rotation.y = lerp_angle(orientation.rotation.y, target_yaw, delta * 10.0)
+
+
+
+	dodge_timer -= delta
+	if dodge_timer <= 0.0:
+		is_dodging = false
+
+# ========================
 # COMBAT / HEALTH
 # ========================
 func take_damage(amount: int) -> void:
+	if invulnerable:
+		return
 	health = clamp(health - amount, 0, max_health)
-	if healthbar:
-		healthbar.value = health
-	if health <= 0:
-		die()
+	if healthbar: healthbar.value = health
+	if health <= 0: die()
 
 func heal(amount: int) -> void:
 	health = clamp(health + amount, 0, max_health)
-	if healthbar:
-		healthbar.value = health
+	if healthbar: healthbar.value = health
 
 func die() -> void:
-	print("Player died!")
 	set_physics_process(false)
+	get_tree().reload_current_scene()
 
+# ========================
+# WEAPON
+# ========================
 func swap_weapon() -> void:
 	if weapons.size() <= 1:
 		return
@@ -261,14 +333,5 @@ func swap_weapon() -> void:
 	current_weapon_index = (current_weapon_index + 1) % weapons.size()
 	current_weapon = weapons[current_weapon_index]
 	current_weapon.visible = true
-	print("Swapped to:", current_weapon.name)
-
-func apply_knockback(force: Vector3) -> void:
-	knockback_velocity = force
-
-func spawn_hit_particles(hit_position: Vector3):
-	var hit_particles_scene = preload("res://hit_particles.tscn")
-	var particles = hit_particles_scene.instantiate()
-	get_tree().current_scene.add_child(particles)
-	particles.global_position = hit_position
-	particles.emitting = true
+	if current_weapon.has_method("set_player"):
+		current_weapon.set_player(self)

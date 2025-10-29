@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://firqe1w6aaey"]
+
+[ext_resource type="Script" uid="uid://cdwefs75r17oa" path="res://tutexit_area.gd" id="1_2d2ir"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6xmnl"]
+
+[node name="tutexit_area" type="Area3D"]
+script = ExtResource("1_2d2ir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6xmnl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

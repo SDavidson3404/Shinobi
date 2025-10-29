@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://mnvod8rya2ct"]
+[gd_scene load_steps=19 format=3 uid="uid://mnvod8rya2ct"]
 
 [ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_7n6eb"]
 [ext_resource type="Script" uid="uid://bwnmaj6myi0b5" path="res://Collapsable_wall.gd" id="1_ehuit"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="2_5mrt3"]
+[ext_resource type="PackedScene" uid="uid://firqe1w6aaey" path="res://tutexit_area.tscn" id="4_hu44a"]
 [ext_resource type="PackedScene" uid="uid://cgalxrhsb3eqe" path="res://healing_pot.tscn" id="4_rwowx"]
 [ext_resource type="PackedScene" uid="uid://dx0mrg54htqlg" path="res://collectible.tscn" id="5_hu44a"]
 
@@ -38,6 +39,9 @@ viewport_path = NodePath("Text/SubViewport3")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4t6hg"]
 viewport_path = NodePath("Text/SubViewport4")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rwowx"]
+viewport_path = NodePath("Text/SubViewport5")
 
 [node name="Tutorial" type="Node3D"]
 
@@ -195,7 +199,7 @@ texture = SubResource("ViewportTexture_7n6eb")
 
 [node name="SubViewport2" type="SubViewport" parent="Text"]
 transparent_bg = true
-size = Vector2i(1000, 512)
+size = Vector2i(1000, 700)
 
 [node name="Label" type="Label" parent="Text/SubViewport2"]
 modulate = Color(0, 0.686, 0.894, 1)
@@ -205,7 +209,8 @@ scale = Vector2(5, 5)
 text = "Left Click to Light
 Attack
 Right Click to Heavy
-Attack"
+Attack
+Shift to dodge"
 
 [node name="Sprite3D3" type="Sprite3D" parent="Text"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.042042, -68.46416)
@@ -242,10 +247,30 @@ label_settings = SubResource("LabelSettings_7n6eb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.559153, -104.29915)
 texture = SubResource("ViewportTexture_4t6hg")
 
+[node name="SubViewport5" type="SubViewport" parent="Text"]
+transparent_bg = true
+size = Vector2i(1000, 700)
+
+[node name="Label" type="Label" parent="Text/SubViewport5"]
+modulate = Color(0, 0.686, 0.894, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(5, 5)
+text = "When at max potency,
+ jump into the end
+ zone to end the level!"
+
+[node name="Sprite3D5" type="Sprite3D" parent="Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.454638, -124.57247)
+texture = SubResource("ViewportTexture_rwowx")
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="enemy" parent="Enemies" instance=ExtResource("2_5mrt3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1589186, 1.5, -47.159355)
+
+[node name="tutexit_area" parent="Enemies" instance=ExtResource("4_hu44a")]
+transform = Transform3D(32.52211, 0, 0, 0, 1.4427023, 0, 0, 0, 15.599563, -2.373311, 0.7865362, -121.63255)
 
 [node name="Lights" type="Node" parent="."]
 
@@ -313,4 +338,4 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6903327, 12.808117, 
 [node name="collectible6" parent="Collectibles" instance=ExtResource("5_hu44a")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.677316, 12.808117, -101.1107)
 
-[connection signal="enemyKilled" from="Enemies/enemy" to="Platforms/CSGBox3D10" method="_on_enemy_enemy_killed"]
+[connection signal="enemy_killed" from="Enemies/enemy" to="Platforms/CSGBox3D10" method="_on_enemy_enemy_killed"]

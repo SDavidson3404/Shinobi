@@ -43,3 +43,35 @@ transform = Transform3D(86.924866, 0, 0, 0, 1, 0, 0, 0, 55.4292, 0, -0.58385015,
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_hbghi")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(86.924866, 0, 0, 0, -4.371139e-08, -55.4292, 0, 1, -2.4228873e-06, 0, 26.41615, 27.639015)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_hbghi")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(-3.7996065e-06, -1, 0, 86.924866, -4.371139e-08, 0, 0, 0, 55.4292, -43, 10.604096, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D3/StaticBody3D"]
+shape = SubResource("BoxShape3D_hbghi")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(-3.7996065e-06, -1, 0, 86.924866, -4.371139e-08, 0, 0, 0, 55.4292, 43, 10.604096, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D4/StaticBody3D"]
+shape = SubResource("BoxShape3D_hbghi")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(86.924866, 0, 0, 0, -4.371139e-08, -55.4292, 0, 1, -2.4228873e-06, 0, 26.41615, -27.301277)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D5/StaticBody3D"]
+shape = SubResource("BoxShape3D_hbghi")

@@ -25,5 +25,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007965088, 0.16773993, 0.0
 shape = SubResource("BoxShape3D_e4ynd")
 
 [node name="ComboTimer" type="Timer" parent="."]
-
-[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

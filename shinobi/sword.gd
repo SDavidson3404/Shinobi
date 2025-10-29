@@ -1,6 +1,7 @@
 extends Node3D
 
 var player: CharacterBody3D = null
+var hit_enemies: Array = []
 
 # === NODES ===
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -8,7 +9,7 @@ var player: CharacterBody3D = null
 @onready var combo_timer: Timer = $ComboTimer
 
 # === STATS ===
-@export var light_damage: int = 3
+@export var light_damage: int = 5
 @export var heavy_damage: int = 10
 @export var light_knockback: float = 5.0
 @export var heavy_knockback: float = 10.0
@@ -105,9 +106,6 @@ func attack(is_heavy: bool = false) -> void:
 		anim.play(anim_name)
 	else:
 		push_warning("Missing animation: %s (sequence: %s)" % [anim_name, sequence])
-
-	can_damage = true
-	area.monitoring = true
 	can_chain = false
 	combo_timer.start(combo_timeout)
 
@@ -121,6 +119,8 @@ func end_attack() -> void:
 	can_damage = false
 	area.monitoring = false
 	can_chain = true
+	hit_enemies.clear()  # reset hit list
+
 
 func end_combo() -> void:
 	attack_history.clear()
@@ -128,15 +128,11 @@ func end_combo() -> void:
 	can_chain = true
 	can_damage = false
 	area.monitoring = false
+	hit_enemies.clear()  # reset hit list
 	self.transform = rest_transform
 
 func _on_combo_timeout() -> void:
 	end_combo()
-
-# ========================
-# HIT DETECTION
-# ========================
-
 
 # ========================
 # PARTICLES + HIT STOP
@@ -186,6 +182,11 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 	if not enemy_node:
 		return
 
+	# --- Prevent multiple hits on same enemy in one swing ---
+	if enemy_node in hit_enemies:
+		return
+	hit_enemies.append(enemy_node)
+
 	# Determine attack type
 	var last_type: String = attack_history.back() if attack_history.size() > 0 else "L"
 	var atk_damage: int = heavy_damage if last_type == "H" else light_damage
@@ -201,10 +202,34 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 		direction.y = 0.01
 		enemy_node.apply_knockback(direction * atk_knockback)
 
-	# --- Spawn hit particles ---
+	# --- Visuals + hit pause ---
 	var hit_pos: Vector3 = body.global_transform.origin
 	var hit_dir: Vector3 = (body.global_transform.origin - global_transform.origin).normalized()
 	spawn_hit_particles(hit_pos, hit_dir)
-
-	# --- Hit pause ---
 	hit_pause_global()
+
+func enable_damage_window() -> void:
+	hit_enemies.clear()
+	can_damage = true
+	area.monitoring = true
+	hit_enemies.clear()  # reset hit cache at start of window
+
+func disable_damage_window() -> void:
+	can_damage = false
+	area.monitoring = false
+
+var last_tip_pos: Vector3
+
+func _physics_process(_delta):
+	if can_damage:
+		var tip_pos = area.global_transform.origin
+		var space = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.new()
+		query.from = last_tip_pos
+		query.to = tip_pos
+		query.exclude = [self]  # Exclude the player
+		query.collision_mask = 1 << 2  # optional, adjust to your enemy layer
+
+		var result = space.intersect_ray(query)
+		if result and result.collider and result.collider.is_in_group("enemies"):
+			_on_hitbox_body_entered(result.collider)

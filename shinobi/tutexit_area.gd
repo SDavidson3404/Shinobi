@@ -2,7 +2,7 @@ extends Area3D
 
 var can_exit = false
 
-@export var next_scene_path: String = "res://level_2.tscn"
+@export var next_scene_path: String = "res://level_1.tscn"
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_body_entered"))
@@ -13,7 +13,6 @@ func _on_body_entered(body: Node) -> void:
 		if body.is_in_group("player"):
 			print("Level complete! Loading next scene...")
 			change_to_next_scene()
-
 
 func change_to_next_scene():
 	if next_scene_path == "":

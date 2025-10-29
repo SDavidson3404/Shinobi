@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgh8jmo4veeiq"]
+[gd_scene load_steps=6 format=3 uid="uid://cgh8jmo4veeiq"]
 
 [ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_3hls8"]
-[ext_resource type="Script" uid="uid://bbu0elgqd0704" path="res://level_1.gd" id="1_hbghi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3hls8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,10 +19,9 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_hbghi"]
 
 [node name="Level 1" type="Node3D"]
-script = ExtResource("1_hbghi")
 
 [node name="Player" parent="." instance=ExtResource("1_3hls8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.893356, 1, 23.921947)
 
 [node name="Environment" type="Node" parent="."]
 

@@ -6,7 +6,6 @@ var hit_enemies: Array = []
 # === NODES ===
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var area: Area3D = $hitbox
-@onready var combo_timer: Timer = $ComboTimer
 
 # === STATS ===
 @export var light_damage: int = 5
@@ -14,7 +13,7 @@ var hit_enemies: Array = []
 @export var light_knockback: float = 5.0
 @export var heavy_knockback: float = 10.0
 @export var stamina_cost_light: float = 10.0
-@export var stamina_cost_heavy: float = 20.0
+@export var stamina_cost_heavy: float = 15.0
 @export var hit_pause_duration: float = 0.02
 @export var combo_timeout: float = 1.0
 @export var max_combo: int = 3
@@ -38,7 +37,10 @@ var rest_transform: Transform3D
 	"LHL": "LHL",
 	"HLH": "HLH",
 	"HHL": "HHL",
-	"LHH": "LHH"
+	"LHH": "LHH",
+	"HLL": "HLL",
+	"LLH": "LLH",
+	"HHH": "HHH"
 }
 
 # ========================
@@ -48,7 +50,6 @@ func _ready() -> void:
 	rest_transform = self.transform
 	area.monitoring = false
 	area.body_entered.connect(_on_hitbox_body_entered)
-	combo_timer.timeout.connect(_on_combo_timeout)
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]
@@ -107,7 +108,6 @@ func attack(is_heavy: bool = false) -> void:
 	else:
 		push_warning("Missing animation: %s (sequence: %s)" % [anim_name, sequence])
 	can_chain = false
-	combo_timer.start(combo_timeout)
 
 # ========================
 # ANIMATION SIGNALS
@@ -130,9 +130,6 @@ func end_combo() -> void:
 	area.monitoring = false
 	hit_enemies.clear()  # reset hit list
 	self.transform = rest_transform
-
-func _on_combo_timeout() -> void:
-	end_combo()
 
 # ========================
 # PARTICLES + HIT STOP
@@ -161,14 +158,8 @@ func hit_pause_global() -> void:
 	await get_tree().create_timer(hit_pause_duration).timeout
 	Engine.time_scale = original_time_scale
 
-
-
-
 func set_player(p: Player) -> void:
 	player = p
-
-
-
 
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	if not can_damage:
@@ -217,19 +208,3 @@ func enable_damage_window() -> void:
 func disable_damage_window() -> void:
 	can_damage = false
 	area.monitoring = false
-
-var last_tip_pos: Vector3
-
-func _physics_process(_delta):
-	if can_damage:
-		var tip_pos = area.global_transform.origin
-		var space = get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.new()
-		query.from = last_tip_pos
-		query.to = tip_pos
-		query.exclude = [self]  # Exclude the player
-		query.collision_mask = 1 << 2  # optional, adjust to your enemy layer
-
-		var result = space.intersect_ray(query)
-		if result and result.collider and result.collider.is_in_group("enemies"):
-			_on_hitbox_body_entered(result.collider)

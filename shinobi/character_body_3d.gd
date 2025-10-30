@@ -9,7 +9,6 @@ class_name Player
 @onready var anim_player: AnimationPlayer = $Orientation/aspects/AnimationPlayer
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
-@onready var rope_mesh: MeshInstance3D = $RopeMesh
 @onready var grapple_ray: RayCast3D = $RayCast3D
 @onready var weapon_holster: Node3D = $"Orientation/aspects/Weapon holster"
 @onready var stamina_bar: ProgressBar = $"../UI/StaminaBar"
@@ -47,7 +46,6 @@ var current_weapon: Node3D = null
 @export var grapple_stamina_cost: float = 50.0
 var is_grappling: bool = false
 var grapple_point: Vector3
-var _rope_material: StandardMaterial3D = null
 
 # ========================
 # STAMINA
@@ -85,13 +83,11 @@ var invuln_timer: float = 0.0
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	add_to_group("player")
-
 	# Setup weapons
 	for child in weapon_holster.get_children():
 		if child is Node3D:
 			weapons.append(child)
 			child.visible = false
-
 	if weapons.size() > 0:
 		current_weapon_index = 0
 		current_weapon = weapons[current_weapon_index]
@@ -129,20 +125,14 @@ func _physics_process(delta: float) -> void:
 	handle_grapple(delta)
 	handle_dodge(delta)
 	move_and_slide()
-
-	# Stamina recharge
 	if stamina_recharge_timer > 0.0:
 		stamina_recharge_timer -= delta
 	else:
 		current_stamina = min(current_stamina + stamina_recharge_rate * delta, max_stamina)
 	if stamina_bar:
 		stamina_bar.value = current_stamina
-
-	# Cooldowns
 	if dodge_cooldown_timer > 0.0:
 		dodge_cooldown_timer -= delta
-
-	# Invulnerability timer
 	if invulnerable:
 		invuln_timer -= delta
 		if invuln_timer <= 0.0:
@@ -154,39 +144,31 @@ func _physics_process(delta: float) -> void:
 func handle_movement(delta: float) -> void:
 	if is_dodging or is_grappling:
 		return
-
 	input_vector = Vector2(
 		Input.get_action_strength("D") - Input.get_action_strength("A"),
 		Input.get_action_strength("W") - Input.get_action_strength("S")
 	)
-
 	var move_dir: Vector3 = Vector3.ZERO
 	if input_vector != Vector2.ZERO:
 		var cam_basis = camera.global_transform.basis
 		var forward = -cam_basis.z; forward.y = 0; forward = forward.normalized()
 		var right = cam_basis.x; right.y = 0; right = right.normalized()
 		move_dir = (input_vector.x * right + input_vector.y * forward).normalized()
-
 		velocity.x = move_dir.x * SPEED
 		velocity.z = move_dir.z * SPEED
-
 		if move_dir.length() > 0.01:
 			var target_yaw = atan2(-move_dir.x, -move_dir.z)
 			var current_yaw = orientation.rotation.y
 			orientation.rotation.y = lerp_angle(current_yaw, target_yaw, delta * 10.0)  # adjust 10.0 for snappiness
-
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta * 5)
 		velocity.z = move_toward(velocity.z, 0, SPEED * delta * 5)
-
 	if Input.is_action_just_pressed("Space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	else:
 		velocity.y = max(velocity.y, 0)
-
 	velocity += knockback_velocity
 	knockback_velocity = knockback_velocity.move_toward(Vector3.ZERO, knockback_decay * delta)
 
@@ -208,16 +190,13 @@ func try_grapple() -> void:
 		cancel_grapple(); return
 	if current_stamina < grapple_stamina_cost:
 		return
-
 	var space_state = get_world_3d().direct_space_state
 	var ray_origin = camera.global_position
 	var ray_end = ray_origin + -camera.global_transform.basis.z * max_grapple_distance
-
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = ray_origin
 	query.to = ray_end
 	query.exclude = [self]
-
 	var result = space_state.intersect_ray(query)
 	if result and result.has("position"):
 		grapple_point = result["position"]
@@ -226,39 +205,18 @@ func try_grapple() -> void:
 		stamina_recharge_timer = stamina_recharge_delay
 
 func update_rope() -> void:
-	if not is_grappling:
-		if rope_mesh: rope_mesh.visible = false
-		return
-	if not rope_mesh: return
-
 	var verts = PackedVector3Array([camera.global_position, grapple_point])
 	var arrays = []; arrays.resize(Mesh.ARRAY_MAX); arrays[Mesh.ARRAY_VERTEX] = verts
-	var mesh = ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
-	rope_mesh.mesh = mesh
-
-	if _rope_material == null:
-		_rope_material = StandardMaterial3D.new()
-		_rope_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		_rope_material.albedo_color = Color(0.2, 1.0, 0.8)
-		_rope_material.metallic = 0
-		_rope_material.roughness = 1
-	if rope_mesh.mesh and rope_mesh.mesh.get_surface_count() > 0:
-		rope_mesh.set_surface_override_material(0, _rope_material)
-	rope_mesh.visible = true
 
 func cancel_grapple() -> void:
 	is_grappling = false
-	rope_mesh.visible = false
 
 # ========================
 # DODGE
 # ========================
 func try_dodge() -> void:
-	print("Trying dodge")  # Debug line
 	if is_dodging or is_grappling or dodge_cooldown_timer > 0 or current_stamina < dodge_stamina_cost:
 		return
-
 	var input_dir = Vector2(
 		Input.get_action_strength("D") - Input.get_action_strength("A"),
 		Input.get_action_strength("W") - Input.get_action_strength("S")
@@ -266,41 +224,31 @@ func try_dodge() -> void:
 	var cam_basis = camera.global_transform.basis
 	var forward = -cam_basis.z; forward.y = 0
 	var right = cam_basis.x; right.y = 0
-
 	dodge_direction = ( (input_dir.x * right + input_dir.y * forward).normalized() 
 						if input_dir.length() > 0.1 else -forward.normalized() )
-
 	is_dodging = true
 	dodge_timer = dodge_duration
 	dodge_cooldown_timer = dodge_cooldown
 	current_stamina -= dodge_stamina_cost
 	stamina_recharge_timer = stamina_recharge_delay
-
 	if anim_player and anim_player.has_animation("dodge_roll"):
 		anim_player.play("dodge_roll")
-
 	invulnerable = true
 	invuln_timer = dodge_invincibility_time
 
 func handle_dodge(delta: float) -> void:
 	if not is_dodging:
 		return
-
 	# Rotate orientation without tilting mesh
 	orientation.rotation.x = 0
 	orientation.rotation.z = 0
-	
 	var hor_dir = dodge_direction
 	hor_dir.y = 0
 	velocity = hor_dir.normalized() * dodge_speed
-
 # Smooth rotation while dodging
 	if hor_dir.length() > 0.01:
 		var target_yaw = atan2(-hor_dir.x, -hor_dir.z)
 		orientation.rotation.y = lerp_angle(orientation.rotation.y, target_yaw, delta * 10.0)
-
-
-
 	dodge_timer -= delta
 	if dodge_timer <= 0.0:
 		is_dodging = false
@@ -320,7 +268,6 @@ func heal(amount: int) -> void:
 	if healthbar: healthbar.value = health
 
 func die() -> void:
-	set_physics_process(false)
 	get_tree().reload_current_scene()
 
 # ========================
@@ -333,5 +280,3 @@ func swap_weapon() -> void:
 	current_weapon_index = (current_weapon_index + 1) % weapons.size()
 	current_weapon = weapons[current_weapon_index]
 	current_weapon.visible = true
-	if current_weapon.has_method("set_player"):
-		current_weapon.set_player(self)

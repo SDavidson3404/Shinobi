@@ -18,4 +18,3 @@ func _physics_process(_delta: float) -> void:
 func _on_collectible_collected() -> void:
 	current_potency += 1.0
 	value = current_potency
-	print("Collected! Current potency:", current_potency)

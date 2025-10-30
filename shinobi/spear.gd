@@ -15,7 +15,6 @@ var hit_enemies: Array = []
 @export var stamina_cost_light: float = 10.0
 @export var stamina_cost_heavy: float = 15.0
 @export var hit_pause_duration: float = 0.02
-@export var combo_timeout: float = 1.0
 @export var max_combo: int = 3
 
 # === COMBO STATE ===
@@ -55,21 +54,12 @@ func _ready() -> void:
 	if players.size() > 0:
 		player = players[0]
 
-
-# ========================
-# PLAYER LOOKUP (Parent Climbing)
-# ========================
-func find_player() -> Player:
-	return get_tree().get_root().find_node("Player", true, false) as Player
-
 # ========================
 # ATTACK FUNCTION
 # ========================
 var current_attack_type: String = "L"  # "L" or "H"
 
 func attack(is_heavy: bool = false) -> void:
-	current_attack_type = "H" if is_heavy else "L"
-
 	if not player:
 		var players = get_tree().get_nodes_in_group("player")
 		if players.size() > 0:
@@ -78,11 +68,11 @@ func attack(is_heavy: bool = false) -> void:
 			push_warning("Could not find Player in scene!")
 			return
 
+	current_attack_type = "H" if is_heavy else "L"
 
 	# --- Stamina check ---
 	var cost: float = stamina_cost_heavy if is_heavy else stamina_cost_light
 	if player.current_stamina < cost:
-		print("Not enough stamina!")
 		return
 
 	player.current_stamina -= cost
@@ -159,22 +149,10 @@ func spawn_hit_particles(hit_position: Vector3, hit_direction: Vector3) -> void:
 
 func hit_pause_global() -> void:
 	var original_time_scale = Engine.time_scale
-	Engine.time_scale = 0.09
-
-	var t := Timer.new()
-	t.wait_time = hit_pause_duration
-	t.one_shot = true
-	t.ignore_time_scale = true
-	add_child(t)
-	t.start()
-
-	await t.timeout
-	t.queue_free()
-
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(0.02).timeout
 	Engine.time_scale = original_time_scale
 	is_hit_pausing = false
-
-
 
 func set_player(p: Player) -> void:
 	player = p
@@ -196,7 +174,7 @@ func _on_hitbox_body_entered(body: Node3D) -> void:
 	var atk_knockback = heavy_knockback if current_attack_type == "H" else light_knockback
 	if body.has_method("apply_knockback"):
 		var direction = (body.global_transform.origin - global_transform.origin).normalized()
-		direction.y = 0.01
+		direction.y = 0.1
 		body.apply_knockback(direction * atk_knockback)
 
 	# Spawn particles
@@ -215,7 +193,6 @@ func enable_damage_window() -> void:
 	# Immediately hit any bodies already in the area
 	for body in area.get_overlapping_bodies():
 		_on_hitbox_body_entered(body)
-
 
 func disable_damage_window() -> void:
 	can_damage = false

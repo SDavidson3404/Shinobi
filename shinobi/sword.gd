@@ -15,7 +15,6 @@ var hit_enemies: Array = []
 @export var stamina_cost_light: float = 10.0
 @export var stamina_cost_heavy: float = 15.0
 @export var hit_pause_duration: float = 0.02
-@export var combo_timeout: float = 1.0
 @export var max_combo: int = 3
 
 # === COMBO STATE ===
@@ -50,16 +49,6 @@ func _ready() -> void:
 	rest_transform = self.transform
 	area.monitoring = false
 	area.body_entered.connect(_on_hitbox_body_entered)
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		player = players[0]
-
-
-# ========================
-# PLAYER LOOKUP (Parent Climbing)
-# ========================
-func find_player() -> Player:
-	return get_tree().get_root().find_node("Player", true, false) as Player
 
 # ========================
 # ATTACK FUNCTION
@@ -69,44 +58,27 @@ func attack(is_heavy: bool = false) -> void:
 		var players = get_tree().get_nodes_in_group("player")
 		if players.size() > 0:
 			player = players[0]
-		else:
-			push_warning("Could not find Player in scene!")
-			return
-
-
 	# --- Stamina check ---
 	var cost: float = stamina_cost_heavy if is_heavy else stamina_cost_light
 	if player.current_stamina < cost:
-		print("Not enough stamina!")
 		return
-
 	player.current_stamina -= cost
-	player.stamina_recharge_timer = player.stamina_recharge_delay
-
 	# --- Combo logic ---
 	if not can_chain and is_attacking:
 		return
-
 	var type_char: String = "H" if is_heavy else "L"
-
 	if not is_attacking:
 		is_attacking = true
 		attack_history.clear()
-
 	attack_history.append(type_char)
-
 	if attack_history.size() > max_combo:
 		attack_history = attack_history.slice(-max_combo, max_combo)
-
 	var sequence: String = "".join(attack_history).strip_edges().to_upper()
 	var anim_name: String = combo_map.get(sequence, "") as String
 	if anim_name == "":
 		anim_name = "swing" if type_char == "L" else "H"
-
 	if anim.has_animation(anim_name):
 		anim.play(anim_name)
-	else:
-		push_warning("Missing animation: %s (sequence: %s)" % [anim_name, sequence])
 	can_chain = false
 
 # ========================

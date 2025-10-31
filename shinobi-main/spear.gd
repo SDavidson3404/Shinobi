@@ -47,6 +47,7 @@ var is_hit_pausing: bool = false
 # READY
 # ========================
 func _ready() -> void:
+	Potency.connect("collected", Callable(self, "_on_collected"))
 	rest_transform = self.transform
 	area.monitoring = false
 	area.body_entered.connect(_on_hitbox_body_entered)
@@ -107,9 +108,6 @@ func attack(is_heavy: bool = false) -> void:
 # ========================
 # ANIMATION SIGNALS
 # ========================
-func enable_next_chain() -> void:
-	can_chain = true
-
 func end_attack() -> void:
 	can_damage = false
 	area.monitoring = false
@@ -189,17 +187,16 @@ func enable_damage_window() -> void:
 	hit_enemies.clear()
 	can_damage = true
 	area.monitoring = true
-
 	# Immediately hit any bodies already in the area
 	for body in area.get_overlapping_bodies():
 		_on_hitbox_body_entered(body)
-
-func disable_damage_window() -> void:
-	can_damage = false
-	area.monitoring = false
 
 func trigger_hit_pause() -> void:
 	if is_hit_pausing:
 		return
 	is_hit_pausing = true
 	hit_pause_global()
+
+func _on_collected():
+	self.light_damage += 1
+	self.heavy_damage += 1

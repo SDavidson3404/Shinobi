@@ -11,10 +11,7 @@ func _ready():
 func _on_body_entered(body: Node) -> void:
 	if can_exit:
 		if body.is_in_group("player"):
-			change_to_next_scene()
-
-func change_to_next_scene():
-	get_tree().change_scene_to_file(next_scene_path)
+			get_tree().change_scene_to_file(next_scene_path)
 
 func _on_max_collected():
 	can_exit = true

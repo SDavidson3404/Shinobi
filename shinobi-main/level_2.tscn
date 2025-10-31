@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://kbs8s88ll1oh"]
+[gd_scene load_steps=4 format=3 uid="uid://kbs8s88ll1oh"]
 
 [ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_jg0dc"]
+[ext_resource type="PackedScene" uid="uid://b865ifsvnin08" path="res://killzone.tscn" id="2_nmjpi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nmjpi"]
 
@@ -90,3 +91,6 @@ transform = Transform3D(-4.683375e-06, 0.9999999, -1.9073486e-06, 107.14315, 4.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D10/StaticBody3D"]
 shape = SubResource("BoxShape3D_nmjpi")
+
+[node name="killzone" parent="." instance=ExtResource("2_nmjpi")]
+transform = Transform3D(649.30457, 0, 0, 0, 1, 0, 0, 0, 1088.9832, 54, -22.63734, -59)

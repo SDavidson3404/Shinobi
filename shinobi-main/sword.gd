@@ -46,6 +46,7 @@ var rest_transform: Transform3D
 # READY
 # ========================
 func _ready() -> void:
+	Potency.connect("collected", Callable(self, "_on_collected"))
 	rest_transform = self.transform
 	area.monitoring = false
 	area.body_entered.connect(_on_hitbox_body_entered)
@@ -84,9 +85,6 @@ func attack(is_heavy: bool = false) -> void:
 # ========================
 # ANIMATION SIGNALS
 # ========================
-func enable_next_chain() -> void:
-	can_chain = true
-
 func end_attack() -> void:
 	can_damage = false
 	area.monitoring = false
@@ -177,6 +175,6 @@ func enable_damage_window() -> void:
 	area.monitoring = true
 	hit_enemies.clear()  # reset hit cache at start of window
 
-func disable_damage_window() -> void:
-	can_damage = false
-	area.monitoring = false
+func _on_collected():
+	self.light_damage += 1
+	self.heavy_damage += 1

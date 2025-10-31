@@ -151,3 +151,18 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.086313, 1.2600527, -3
 
 [node name="HealingPot" parent="." instance=ExtResource("4_nxusl")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.526367, 1.0950047, -5.601563)
+
+[node name="collectible2" parent="." instance=ExtResource("3_71d8t")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.870136, 0.7500001, -3.0150936)
+
+[node name="collectible3" parent="." instance=ExtResource("3_71d8t")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 11.491097, 0.7500001, -3.3584018)
+
+[node name="collectible4" parent="." instance=ExtResource("3_71d8t")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.678593, 0.7500001, -1.2814059)
+
+[node name="collectible5" parent="." instance=ExtResource("3_71d8t")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.079162, 0.7500001, -1.4009606)
+
+[node name="collectible6" parent="." instance=ExtResource("3_71d8t")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 12.025107, 0.7500001, -1.7186761)

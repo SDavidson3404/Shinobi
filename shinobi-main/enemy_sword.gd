@@ -1,7 +1,7 @@
 extends Area3D
 class_name Sword
 
-@export var damage: int = 10
+@export var damage: int = 8
 var can_damage: bool = false
 
 func enable_damage():
@@ -15,7 +15,5 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 	if body.is_in_group("enemies"):
 		return
-	if not body.has_method("take_damage"):
-		return
-	if body:
+	if body.has_method("take_damage"):
 		body.take_damage(damage)

@@ -13,6 +13,7 @@ class_name Player
 @onready var weapon_holster: Node3D = $"Orientation/aspects/Weapon holster"
 @onready var stamina_bar: ProgressBar = $"../UI/StaminaBar"
 @onready var healthbar: ProgressBar = $"../UI/Healthbar"
+@onready var sprite_3d: Sprite3D = $CameraPivot/SpringArm3D/Camera3D/Sprite3D
 
 # ========================
 # MOVEMENT
@@ -81,6 +82,7 @@ var invuln_timer: float = 0.0
 # READY
 # ========================
 func _ready() -> void:
+	Collectible.connect("collected", Callable(self, "_on_collectible_collected"))
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	add_to_group("player")
 	# Setup weapons
@@ -181,7 +183,7 @@ func handle_grapple(delta: float) -> void:
 	var to_target = grapple_point - global_transform.origin
 	if to_target.length() > grapple_stop_distance:
 		velocity = velocity.lerp(to_target.normalized() * grapple_speed, delta * 8.0)
-		update_rope()
+
 	else:
 		cancel_grapple()
 
@@ -204,10 +206,6 @@ func try_grapple() -> void:
 		current_stamina -= grapple_stamina_cost
 		stamina_recharge_timer = stamina_recharge_delay
 
-func update_rope() -> void:
-	var verts = PackedVector3Array([camera.global_position, grapple_point])
-	var arrays = []; arrays.resize(Mesh.ARRAY_MAX); arrays[Mesh.ARRAY_VERTEX] = verts
-
 func cancel_grapple() -> void:
 	is_grappling = false
 
@@ -215,6 +213,7 @@ func cancel_grapple() -> void:
 # DODGE
 # ========================
 func try_dodge() -> void:
+	$CameraPivot/SpringArm3D.collision_mask = 0
 	if is_dodging or is_grappling or dodge_cooldown_timer > 0 or current_stamina < dodge_stamina_cost:
 		return
 	var input_dir = Vector2(
@@ -252,6 +251,7 @@ func handle_dodge(delta: float) -> void:
 	dodge_timer -= delta
 	if dodge_timer <= 0.0:
 		is_dodging = false
+		$CameraPivot/SpringArm3D.collision_mask = 1
 
 # ========================
 # COMBAT / HEALTH
@@ -261,14 +261,11 @@ func take_damage(amount: int) -> void:
 		return
 	health = clamp(health - amount, 0, max_health)
 	if healthbar: healthbar.value = health
-	if health <= 0: die()
+	if health <= 0: get_tree().reload_current_scene()
 
 func heal(amount: int) -> void:
 	health = clamp(health + amount, 0, max_health)
 	if healthbar: healthbar.value = health
-
-func die() -> void:
-	get_tree().reload_current_scene()
 
 # ========================
 # WEAPON
@@ -280,3 +277,12 @@ func swap_weapon() -> void:
 	current_weapon_index = (current_weapon_index + 1) % weapons.size()
 	current_weapon = weapons[current_weapon_index]
 	current_weapon.visible = true
+
+func _on_collectible_collected():
+	max_health += 10
+	health += 10
+	if healthbar: healthbar.max_value = max_health
+	if healthbar: healthbar.value = health
+	sprite_3d.visible = true
+	await get_tree().create_timer(1).timeout
+	sprite_3d.visible = false

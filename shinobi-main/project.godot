@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Collectible="*res://collectible.gd"
 Potency="*res://potency.gd"
+SceneManager="*res://sceneManager.gd"
 
 [input]
 

@@ -8,8 +8,10 @@ func _ready():
 func _on_body_entered(body: Node) -> void:
 	if can_exit:
 		if body.is_in_group("player"):
-			get_tree().change_scene_to_file("res://main menu.tscn")
-	return
+			change_to_next_scene()
+
+func change_to_next_scene():
+	SceneManager.change_scene("res://level_2.tscn")
 
 func _on_max_collected():
 	can_exit = true

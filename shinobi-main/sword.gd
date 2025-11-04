@@ -8,6 +8,12 @@ signal hit_landed
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var area: Area3D = $hitbox
 
+# === HITPAUSE ===
+var hitpause_count = 0
+var hitpause_target = 0.05
+@export var hit_pause_duration: float = 0.02
+var _original_time_scale := 1.0
+
 # === STATS ===
 @export var light_damage: int = 7
 @export var heavy_damage: int = 10
@@ -15,7 +21,6 @@ signal hit_landed
 @export var heavy_knockback: float = 10.0
 @export var stamina_cost_light: float = 7.0
 @export var stamina_cost_heavy: float = 10.0
-@export var hit_pause_duration: float = 0.02
 @export var max_combo: int = 3
 
 # === COMBO STATE ===
@@ -124,10 +129,18 @@ func spawn_hit_particles(hit_position: Vector3, hit_direction: Vector3) -> void:
 	)
 
 func hit_pause_global() -> void:
-	var original_time_scale = Engine.time_scale
-	Engine.time_scale = 0.05  # very slow, not fully 0
+	if hitpause_count == 0:
+		# first hitpause, save original scale
+		_original_time_scale = Engine.time_scale
+		Engine.time_scale = hitpause_target
+
+	hitpause_count += 1
 	await get_tree().create_timer(hit_pause_duration).timeout
-	Engine.time_scale = original_time_scale
+	hitpause_count -= 1
+
+	if hitpause_count == 0:
+		# restore only when last hitpause ends
+		Engine.time_scale = _original_time_scale
 
 func set_player(p: Player) -> void:
 	player = p

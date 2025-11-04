@@ -6,17 +6,16 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 func _on_start_game_button_down() -> void:
-	get_tree().change_scene_to_file("res://level_1.tscn")
+	SceneManager.change_scene("res://level_1.tscn")
 
 func _on_tutorial_button_down() -> void:
-	get_tree().change_scene_to_file("res://tutorial.tscn")
+	SceneManager.change_scene("res://tutorial.tscn")
 
 func _on_quit_game_button_down() -> void:
 	get_tree().quit()
 
 func _on_settings_button_down() -> void:
-	get_tree().change_scene_to_file("res://Settings.tscn")
-
+	SceneManager.change_scene("res://Settings.tscn")
 
 func _on_load_button_down() -> void:
 	var file_path = "res://save_game.json"
@@ -31,7 +30,7 @@ func _on_load_button_down() -> void:
 			if result == OK:                   # Check if parsing succeeded
 				var save_data = json.get_data()   # Retrieve the dictionary
 				saved_level = save_data["current_level"]
-				get_tree().change_scene_to_file(saved_level + ".tscn")
+				SceneManager.change_scene(saved_level + ".tscn")
 				print("Game loaded successfully!")
 			else:
 				print("Failed to parse JSON:", json.get_error_message())

@@ -2,10 +2,7 @@ extends Area3D
 
 var can_exit = false
 
-@export var next_scene_path: String = "res://level_2.tscn"
-
 func _ready():
-	connect("body_entered", Callable(self, "_on_body_entered"))
 	Potency.connect("max_collected", Callable(self, "_on_max_collected"))
 
 func _on_body_entered(body: Node) -> void:
@@ -14,7 +11,7 @@ func _on_body_entered(body: Node) -> void:
 			change_to_next_scene()
 
 func change_to_next_scene():
-	get_tree().change_scene_to_file(next_scene_path)
+	SceneManager.change_scene("res://level_3.tscn")
 
 func _on_max_collected():
 	can_exit = true

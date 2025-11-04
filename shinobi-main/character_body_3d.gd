@@ -21,9 +21,9 @@ var level_2 := "res://level_2"
 @onready var weapon_holster: Node3D = $"Orientation/aspects/Weapon holster"
 @onready var stamina_bar: ProgressBar = $"../UI/StaminaBar"
 @onready var healthbar: ProgressBar = $"../UI/Healthbar"
-@onready var sprite_3d: Sprite3D = $CameraPivot/SpringArm3D/Camera3D/Sprite3D
 @onready var sword: Node3D = $"Orientation/aspects/Weapon holster/Sword"
 @onready var spear: Node3D = $"Orientation/aspects/Weapon holster/Spear"
+@onready var sprite_3d: Sprite3D = $CameraPivot/Sprite3D
 
 # ========================
 # MOVEMENT
@@ -318,7 +318,15 @@ func take_damage(amount: int) -> void:
 		return
 	health = clamp(health - amount, 0, max_health)
 	if healthbar: healthbar.value = health
-	if health <= 0: get_tree().reload_current_scene()
+	if health <= 0:
+		var current_scene = get_tree().current_scene.name
+		if current_scene == "level 1":
+			current_scene = "level_1.tscn"
+		elif current_scene == "level 2":
+			current_scene = "level_2.tscn"
+		elif current_scene == "level_3":
+			current_scene = "level_3.tscn"
+		get_tree().change_scene_to_file(current_scene)
 
 func heal(amount: int) -> void:
 	health = clamp(health + amount, 0, max_health)

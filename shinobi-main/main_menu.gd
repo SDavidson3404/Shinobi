@@ -25,13 +25,23 @@ func _on_load_button_down() -> void:
 			var text = file.get_as_text()
 			file.close()
 			
-			var json = JSON.new()              # Create a JSON instance
-			var result = json.parse(text)      # Parse the text
-			if result == OK:                   # Check if parsing succeeded
-				var save_data = json.get_data()   # Retrieve the dictionary
-				saved_level = save_data["current_level"]
-				SceneManager.change_scene(saved_level + ".tscn")
-				print("Game loaded successfully!")
+			var json = JSON.new()
+			var result = json.parse(text)
+			if result == OK:
+				var save_data = json.get_data()
+				
+				# Load level
+				saved_level = save_data.get("current_level", 1)
+				SceneManager.change_scene(str(saved_level) + ".tscn")
+				
+				# Load skills
+				SkillManager.load_skills()  # Initialize default skill tree
+				var saved_skills = save_data.get("skills", {})
+				for skill_name in saved_skills.keys():
+					if SkillManager.skills.has(skill_name):
+						SkillManager.skills[skill_name]["unlocked"] = saved_skills[skill_name]["unlocked"]
+				
+				print("Game and skills loaded successfully!")
 			else:
 				print("Failed to parse JSON:", json.get_error_message())
 		else:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4q1his2ytle7"]
+[gd_scene load_steps=15 format=3 uid="uid://b4q1his2ytle7"]
 
-[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_q4otm"]
+[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://Shinobi-main/player/player.tscn" id="1_q4otm"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="2_1aoan"]
 [ext_resource type="PackedScene" uid="uid://dx0mrg54htqlg" path="res://collectible.tscn" id="3_71d8t"]
 [ext_resource type="PackedScene" uid="uid://cgalxrhsb3eqe" path="res://healing_pot.tscn" id="4_nxusl"]
+[ext_resource type="PackedScene" uid="uid://0jd02ln5yjw0" path="res://Points.tscn" id="5_ytm02"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q4otm"]
 size = Vector3(5.303772, 1, 5.6898804)
@@ -166,3 +167,12 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.079162, 0.7500001, -1
 
 [node name="collectible6" parent="." instance=ExtResource("3_71d8t")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 12.025107, 0.7500001, -1.7186761)
+
+[node name="collectible7" parent="." instance=ExtResource("5_ytm02")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.898637, 1.0436198, 2.0447176)
+
+[node name="collectible8" parent="." instance=ExtResource("5_ytm02")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.806173, 1.0420886, 3.1343772)
+
+[node name="collectible9" parent="." instance=ExtResource("5_ytm02")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.331633, 1.044727, 2.5119836)

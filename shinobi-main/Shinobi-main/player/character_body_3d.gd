@@ -26,6 +26,12 @@ var level_2 := "res://level_2"
 @onready var sprite_3d: Sprite3D = $CameraPivot/Sprite3D
 
 # ========================
+# JUMP
+# ========================
+@export var Max_jumps = 1
+var Current_jumps = 0
+
+# ========================
 # MOVEMENT
 # ========================
 @export var SPEED: float = 7.0
@@ -101,6 +107,8 @@ var invuln_timer: float = 0.0
 # ========================
 func _ready() -> void:
 	var current_scene = get_tree().current_scene.name
+	if current_scene == "Tutorial":
+		scene_to_save = "tutorial"
 	if current_scene == "Level 1":
 		scene_to_save = level_1
 	elif current_scene == "Level 2":
@@ -113,7 +121,14 @@ func _ready() -> void:
 	# Setup weapons
 	for child in weapon_holster.get_children():
 		if child is Node3D:
-			weapons.append(child)
+			if child.name == "Sword":
+				weapons.append(child)
+			if child.name == "Spear":
+				if SkillManager.check_unlocked("spear_unlock"):
+					weapons.append(child)
+			if child.name == "Dagger":
+				if SkillManager.check_unlocked("dagger_unlock"):
+					weapons.append(child)
 			child.visible = false
 	if weapons.size() > 0:
 		current_weapon_index = 0
@@ -121,7 +136,8 @@ func _ready() -> void:
 		current_weapon.visible = true
 		
 	var save_data = {
-		"current_level" : scene_to_save
+		"current_level" : scene_to_save,
+		"skills" : SkillManager.skills
 	}
 
 	var file_path = "res://save_game.json"
@@ -136,6 +152,29 @@ func _ready() -> void:
 		game_saved.visible = false
 	else:
 		print("Failed to open save file!")
+	if SkillManager.check_unlocked("health5"):
+		max_health = 175
+	elif SkillManager.check_unlocked("health4"):
+		max_health = 150
+	elif SkillManager.check_unlocked("health3"):
+		max_health = 130
+	elif SkillManager.check_unlocked("health2"):
+		max_health = 115
+	elif SkillManager.check_unlocked("health1"):
+		max_health = 105
+	if SkillManager.check_unlocked("stamina5"):
+		max_stamina = 175
+	elif SkillManager.check_unlocked("stamina4"):
+		max_stamina = 150
+	elif SkillManager.check_unlocked("stamina3"):
+		max_stamina = 130
+	elif SkillManager.check_unlocked("stamina2"):
+		max_stamina = 115
+	elif SkillManager.check_unlocked("stamina1"):
+		max_stamina = 105
+	if SkillManager.check_unlocked("double_jump"):
+		Max_jumps = 2
+
 # ========================
 # INPUT
 # ========================
@@ -165,8 +204,9 @@ func _input(event):
 		if not is_paused:
 			current_weapon.attack(true)
 	if event.is_action_pressed("dodge"):
-		if not is_paused:
-			try_dodge()
+		if SkillManager.check_unlocked("dodge"):
+			if not is_paused:
+				try_dodge()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -222,12 +262,14 @@ func handle_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta * 5)
 		velocity.z = move_toward(velocity.z, 0, SPEED * delta * 5)
-	if Input.is_action_just_pressed("Space") and is_on_floor():
+	if Input.is_action_just_pressed("Space") and is_on_floor() and Current_jumps < Max_jumps:
 		velocity.y = JUMP_VELOCITY
+		Current_jumps += 1
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
 	else:
 		velocity.y = max(velocity.y, 0)
+		Current_jumps = 0
 	velocity += knockback_velocity
 	knockback_velocity = knockback_velocity.move_toward(Vector3.ZERO, knockback_decay * delta)
 
@@ -320,13 +362,15 @@ func take_damage(amount: int) -> void:
 	if healthbar: healthbar.value = health
 	if health <= 0:
 		var current_scene = get_tree().current_scene.name
+		if current_scene == "tutorial":
+			current_scene = "tutorial.tscn"
 		if current_scene == "level 1":
 			current_scene = "level_1.tscn"
 		elif current_scene == "level 2":
 			current_scene = "level_2.tscn"
 		elif current_scene == "level_3":
 			current_scene = "level_3.tscn"
-		get_tree().change_scene_to_file(current_scene)
+		SceneManager.change_scene(current_scene)
 
 func heal(amount: int) -> void:
 	health = clamp(health + amount, 0, max_health)
@@ -364,7 +408,6 @@ func _process(delta):
 	else:
 		camera_pivot.position = Vector3.ZERO
 
-
 func _on_sword_hit():
 	shake_amount = max(shake_amount, 0.02)
 
@@ -377,8 +420,10 @@ func _on_close_menu_button_down() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_quit_to_menu_button_down() -> void:
-	get_tree().change_scene_to_file("res://main menu.tscn")
-
+	SceneManager.change_scene("res://main menu.tscn")
 
 func _on_quit_button_down() -> void:
 	get_tree().quit()
+
+func _on_skill_tree_button_down() -> void:
+	SceneManager.change_scene("res://skill_tree.tscn")

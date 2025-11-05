@@ -1,11 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://mnvod8rya2ct"]
+[gd_scene load_steps=21 format=3 uid="uid://mnvod8rya2ct"]
 
-[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_7n6eb"]
+[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://Shinobi-main/player/player.tscn" id="1_7n6eb"]
 [ext_resource type="Script" uid="uid://bwnmaj6myi0b5" path="res://Collapsable_wall.gd" id="1_ehuit"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="2_5mrt3"]
 [ext_resource type="PackedScene" uid="uid://firqe1w6aaey" path="res://tutexit_area.tscn" id="4_hu44a"]
 [ext_resource type="PackedScene" uid="uid://cgalxrhsb3eqe" path="res://healing_pot.tscn" id="4_rwowx"]
 [ext_resource type="PackedScene" uid="uid://dx0mrg54htqlg" path="res://collectible.tscn" id="5_hu44a"]
+[ext_resource type="PackedScene" uid="uid://0jd02ln5yjw0" path="res://Points.tscn" id="7_0cr88"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7n6eb"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -43,6 +44,9 @@ viewport_path = NodePath("Text/SubViewport4")
 [sub_resource type="ViewportTexture" id="ViewportTexture_rwowx"]
 viewport_path = NodePath("Text/SubViewport5")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7vrqn"]
+viewport_path = NodePath("Text/SubViewport6")
+
 [node name="Tutorial" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -59,7 +63,7 @@ transform = Transform3D(27.618448, 0, 0, 0, 1, 0, 0, 0, 23.892477, 0, 0, 0)
 shape = SubResource("BoxShape3D_7n6eb")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Platforms"]
-transform = Transform3D(-1.2189261e-06, -0.9999999, 0, 27.88578, -4.3711385e-08, 0, 0, 0, 262.83984, 13.283691, 14, 0)
+transform = Transform3D(-1.2189261e-06, -0.9999999, 0, 27.88578, -4.3711385e-08, 0, 0, 0, 262.83984, 13.283691, 14, 119.35531)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D2"]
 
@@ -91,7 +95,7 @@ transform = Transform3D(2.2200395e-14, 4.3711385e-08, -26.7328, 11.619075, -4.37
 shape = SubResource("BoxShape3D_yb1ct")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Platforms"]
-transform = Transform3D(27.618448, 0, 0, 0, 1, 0, 0, 0, 23.892477, 0, 11, -23)
+transform = Transform3D(72.71472, 0, 0, 0, 1, 0, 0, 0, 23.892477, 0, 11, -23)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D6"]
 
@@ -99,7 +103,7 @@ transform = Transform3D(27.618448, 0, 0, 0, 1, 0, 0, 0, 23.892477, 0, 11, -23)
 shape = SubResource("BoxShape3D_7n6eb")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Platforms"]
-transform = Transform3D(27.618448, 0, 0, 0, 1, 0, 0, 0, 269.59216, 0, 27, 0)
+transform = Transform3D(70.50724, 0, 0, 0, 1, 0, 0, 0, 269.59216, 0, 27, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D7"]
 
@@ -169,6 +173,38 @@ transform = Transform3D(27.618448, 0, 0, 0, 1, 0, 0, 0, 90.30488, 0, 0, -132.809
 [node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D15"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CSGBox3D15/StaticBody3D"]
+shape = SubResource("BoxShape3D_7n6eb")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Platforms"]
+transform = Transform3D(-1.2189261e-06, -0.9999999, 0, 27.88578, -4.3711385e-08, 0, 0, 0, 262.83984, 13.283691, 14, -165.37735)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D16"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CSGBox3D16/StaticBody3D"]
+shape = SubResource("BoxShape3D_yb1ct")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Platforms"]
+transform = Transform3D(-3.1784614e-06, -1, 0, 72.714714, -4.3711385e-08, 0, 0, 0, 23.892475, 34.04734, 11, -23)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CSGBox3D17/StaticBody3D"]
+shape = SubResource("BoxShape3D_7n6eb")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Platforms"]
+transform = Transform3D(-3.7773409e-13, 4.371139e-08, 23.892475, 72.71472, -4.371138e-08, 0, 3.178461e-06, 1, -1.0443732e-06, 24.932198, 11, -33.983887)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D18"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CSGBox3D18/StaticBody3D"]
+shape = SubResource("BoxShape3D_7n6eb")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Platforms"]
+transform = Transform3D(-3.7773409e-13, 4.371139e-08, 23.892475, 72.71472, -4.371138e-08, 0, 3.178461e-06, 1, -1.0443732e-06, 24.932198, 11, -11.854803)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platforms/CSGBox3D19"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/CSGBox3D19/StaticBody3D"]
 shape = SubResource("BoxShape3D_7n6eb")
 
 [node name="Player" parent="." instance=ExtResource("1_7n6eb")]
@@ -264,6 +300,24 @@ text = "When at max potency,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.454638, -124.57247)
 texture = SubResource("ViewportTexture_rwowx")
 
+[node name="SubViewport6" type="SubViewport" parent="Text"]
+transparent_bg = true
+size = Vector2i(150, 100)
+
+[node name="Label" type="Label" parent="Text/SubViewport6"]
+modulate = Color(0, 1, 1, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Collect Blue Orbs
+to Gain Points! 
+Use Points in The
+Skill Tree!"
+horizontal_alignment = 1
+
+[node name="Sprite3D6" type="Sprite3D" parent="Text"]
+transform = Transform3D(0, 0, -0.9999999, 0, 2.9999995, 0, 4.3999996, 0, -2.9802322e-08, 23.081863, 15.037699, -23.06694)
+texture = SubResource("ViewportTexture_7vrqn")
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="enemy" parent="Enemies" instance=ExtResource("2_5mrt3")]
@@ -337,5 +391,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6903327, 12.808117, 
 
 [node name="collectible6" parent="Collectibles" instance=ExtResource("5_hu44a")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.677316, 12.808117, -101.1107)
+
+[node name="collectible7" parent="Collectibles" instance=ExtResource("7_0cr88")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 22.932673, 12.603143, -22.733576)
 
 [connection signal="enemy_killed" from="Enemies/enemy" to="Platforms/CSGBox3D10" method="_on_enemy_enemy_killed"]

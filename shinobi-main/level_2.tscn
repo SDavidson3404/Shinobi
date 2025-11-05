@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://kbs8s88ll1oh"]
 
-[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://player.tscn" id="1_jg0dc"]
+[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://Shinobi-main/player/player.tscn" id="1_jg0dc"]
 [ext_resource type="PackedScene" uid="uid://b865ifsvnin08" path="res://killzone.tscn" id="2_nmjpi"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="3_1y8me"]
 [ext_resource type="PackedScene" uid="uid://dkty7wx8nv28w" path="res://level2exit_area.tscn" id="3_n7ypv"]

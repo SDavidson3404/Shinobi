@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://r313xctl4x75"]
 
-[ext_resource type="Script" uid="uid://btvs1gmcy4g6s" path="res://sword.gd" id="1_rfb2o"]
+[ext_resource type="Script" uid="uid://btvs1gmcy4g6s" path="res://Shinobi-main/weapons/sword.gd" id="1_rfb2o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o8xsq"]
 

@@ -8,19 +8,14 @@ signal hit_landed
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var area: Area3D = $hitbox
 
-# === HITPAUSE ===
-var hitpause_count = 0
-var hitpause_target = 0.05
-@export var hit_pause_duration: float = 0.02
-var _original_time_scale := 1.0
-
 # === STATS ===
-@export var light_damage: int = 7
-@export var heavy_damage: int = 10
+@export var light_damage: int = 10
+@export var heavy_damage: int = 15
 @export var light_knockback: float = 5.0
 @export var heavy_knockback: float = 10.0
-@export var stamina_cost_light: float = 7.0
-@export var stamina_cost_heavy: float = 10.0
+@export var stamina_cost_light: float = 10.0
+@export var stamina_cost_heavy: float = 15.0
+@export var hit_pause_duration: float = 0.02
 @export var max_combo: int = 3
 
 # === COMBO STATE ===
@@ -29,12 +24,13 @@ var can_chain: bool = true
 var is_attacking: bool = false
 var attack_history: Array[String] = []
 var rest_transform: Transform3D
+var is_hit_pausing: bool = false
 
 # === ANIMATION MAP ===
 @export var combo_map: Dictionary = {
 	"L": "swing",
-	"LL": "swing_2",
-	"LLL": "swing_3",
+	"LL": "swing2",
+	"LLL": "swing3",
 	"H": "H1",
 	"HH": "HH",
 	"HL": "HL",
@@ -56,36 +52,74 @@ func _ready() -> void:
 	rest_transform = self.transform
 	area.monitoring = false
 	area.body_entered.connect(_on_hitbox_body_entered)
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		player = players[0]
+	if SkillManager.check_unlocked("the_ultima_spear"):
+		light_damage = 15
+		heavy_damage = 20
+	if SkillManager.check_unlocked("gilded_spear"):
+		light_damage = 14
+		heavy_damage = 19
+	if SkillManager.check_unlocked("steel_spear"):
+		light_damage = 13
+		heavy_damage = 18
+	if SkillManager.check_unlocked("sharp_spear"):
+		light_damage = 12
+		heavy_damage = 17
+	if SkillManager.check_unlocked("dull_spear"):
+		light_damage = 11
+		heavy_damage = 16
+
 
 # ========================
 # ATTACK FUNCTION
 # ========================
+var current_attack_type: String = "L"  # "L" or "H"
+
 func attack(is_heavy: bool = false) -> void:
 	if not player:
 		var players = get_tree().get_nodes_in_group("player")
 		if players.size() > 0:
 			player = players[0]
+		else:
+			push_warning("Could not find Player in scene!")
+			return
+
+	current_attack_type = "H" if is_heavy else "L"
+
 	# --- Stamina check ---
 	var cost: float = stamina_cost_heavy if is_heavy else stamina_cost_light
 	if player.current_stamina < cost:
 		return
+
 	player.current_stamina -= cost
+	player.stamina_recharge_timer = player.stamina_recharge_delay
+
 	# --- Combo logic ---
 	if not can_chain and is_attacking:
 		return
+
 	var type_char: String = "H" if is_heavy else "L"
+
 	if not is_attacking:
 		is_attacking = true
 		attack_history.clear()
+
 	attack_history.append(type_char)
+
 	if attack_history.size() > max_combo:
 		attack_history = attack_history.slice(-max_combo, max_combo)
+
 	var sequence: String = "".join(attack_history).strip_edges().to_upper()
 	var anim_name: String = combo_map.get(sequence, "") as String
 	if anim_name == "":
 		anim_name = "swing" if type_char == "L" else "H"
+
 	if anim.has_animation(anim_name):
 		anim.play(anim_name)
+	else:
+		push_warning("Missing animation: %s (sequence: %s)" % [anim_name, sequence])
 	can_chain = false
 
 # ========================
@@ -129,18 +163,11 @@ func spawn_hit_particles(hit_position: Vector3, hit_direction: Vector3) -> void:
 	)
 
 func hit_pause_global() -> void:
-	if hitpause_count == 0:
-		# first hitpause, save original scale
-		_original_time_scale = Engine.time_scale
-		Engine.time_scale = hitpause_target
-
-	hitpause_count += 1
-	await get_tree().create_timer(hit_pause_duration).timeout
-	hitpause_count -= 1
-
-	if hitpause_count == 0:
-		# restore only when last hitpause ends
-		Engine.time_scale = _original_time_scale
+	var original_time_scale = Engine.time_scale
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(0.02).timeout
+	Engine.time_scale = original_time_scale
+	is_hit_pausing = false
 
 func set_player(p: Player) -> void:
 	player = p
@@ -148,51 +175,46 @@ func set_player(p: Player) -> void:
 func _on_hitbox_body_entered(body: Node3D) -> void:
 	if not can_damage:
 		return
-
-	# Find the enemy root
-	var enemy_node: Node = body
-	while enemy_node and not enemy_node.is_in_group("enemies"):
-		enemy_node = enemy_node.get_parent()
-
-	if not enemy_node:
+	if body in hit_enemies:
 		return
-
-	# --- Prevent multiple hits on same enemy in one swing ---
-	if enemy_node in hit_enemies:
+	if body == player:
 		return
-	hit_enemies.append(enemy_node)
+	hit_enemies.append(body)
+
+	# Apply damage & knockback
+	var atk_damage = heavy_damage if current_attack_type == "H" else light_damage
+	if body.has_method("take_damage"):
+		body.take_damage(atk_damage)
+
+	var atk_knockback = heavy_knockback if current_attack_type == "H" else light_knockback
+	if body.has_method("apply_knockback"):
+		var direction = (body.global_transform.origin - global_transform.origin).normalized()
+		direction.y = 0.1
+		body.apply_knockback(direction * atk_knockback)
+
+	# Spawn particles
+	spawn_hit_particles(body.global_transform.origin,
+		(body.global_transform.origin - global_transform.origin).normalized())
 	
 	hit_landed.emit()
-	
-	# Determine attack type
-	var last_type: String = attack_history.back() if attack_history.size() > 0 else "L"
-	var atk_damage: int = heavy_damage if last_type == "H" else light_damage
-	var atk_knockback: float = heavy_knockback if last_type == "H" else light_knockback
-	
-	# --- Apply damage ---
-	if enemy_node.has_method("take_damage"):
-		enemy_node.take_damage(atk_damage)
-
-	# --- Apply knockback ---
-	if enemy_node.has_method("apply_knockback"):
-		var direction = (enemy_node.global_transform.origin - global_transform.origin).normalized()
-		direction.y = 0.01
-		enemy_node.apply_knockback(direction * atk_knockback)
-
-	# --- Visuals + hit pause ---
-	var hit_pos: Vector3 = body.global_transform.origin
-	var hit_dir: Vector3 = (body.global_transform.origin - global_transform.origin).normalized()
-	spawn_hit_particles(hit_pos, hit_dir)
-	hit_pause_global()
-
-	if body.is_in_group("enemy"):
-		get_parent().apply_shake(0.15)
+		
+	# Trigger hit pause only once
+	if not is_hit_pausing:
+		trigger_hit_pause()
 
 func enable_damage_window() -> void:
 	hit_enemies.clear()
 	can_damage = true
 	area.monitoring = true
-	hit_enemies.clear()  # reset hit cache at start of window
+	# Immediately hit any bodies already in the area
+	for body in area.get_overlapping_bodies():
+		_on_hitbox_body_entered(body)
+
+func trigger_hit_pause() -> void:
+	if is_hit_pausing:
+		return
+	is_hit_pausing = true
+	hit_pause_global()
 
 func _on_collected():
 	self.light_damage += 1

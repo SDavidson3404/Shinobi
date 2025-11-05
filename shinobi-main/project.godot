@@ -18,8 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Collectible="*res://collectible.gd"
-Potency="*res://potency.gd"
+Potency="*res://Shinobi-main/player/potency.gd"
 SceneManager="*res://sceneManager.gd"
+SkillManager="*res://Shinobi-main/skills/skill_manager.gd"
+MainMenu="*res://main_menu.gd"
 
 [input]
 

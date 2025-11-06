@@ -1,7 +1,7 @@
 extends Node
 
 var skills = {}
-var player_points := 15
+var player_points := 40
 var init := false
 
 func load_skills():
@@ -59,12 +59,6 @@ func unlock(id: String):
 		player_points -= skills[id]["cost"]
 		save_skills()  # <-- Save immediately after buying
 
-func _on_scene_changed():
-	print("DEBUG")
-	load_skills()
-	load_skills_state()
-	skills_loaded.emit()
-
 func _ready():
 	if init:
 		return
@@ -76,8 +70,12 @@ func _ready():
 func check_unlocked(id: String) -> bool:
 	if not skills.has(id):
 		return false
+	load_skills_state()
+	skills_loaded.emit()
 	return skills[id]["unlocked"]
 
+func _on_scene_changed():
+	load_skills_state()
 
 func save_skills():
 	var save_data = {
@@ -87,7 +85,7 @@ func save_skills():
 	}
 
 	var json = JSON.stringify(save_data)  # <-- use JSON.stringify() instead of to_json()
-	var file = FileAccess.open("user://test4.json", FileAccess.ModeFlags.WRITE)
+	var file = FileAccess.open("user://test7.json", FileAccess.ModeFlags.WRITE)
 	if file:
 		file.store_string(json)
 		file.close()
@@ -98,7 +96,7 @@ signal skills_loaded
 func load_skills_state():
 	load_skills() # ALWAYS populate keys first
 	
-	var file_path = "user://test4.json"
+	var file_path = "user://test7.json"
 	if FileAccess.file_exists(file_path):
 		var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 		if file:

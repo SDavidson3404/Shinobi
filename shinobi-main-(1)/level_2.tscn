@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://kbs8s88ll1oh"]
+[gd_scene load_steps=13 format=3 uid="uid://kbs8s88ll1oh"]
 
-[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://Shinobi-main/player/player.tscn" id="1_jg0dc"]
+[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://shinobi-main/player/player.tscn" id="1_jg0dc"]
 [ext_resource type="PackedScene" uid="uid://b865ifsvnin08" path="res://killzone.tscn" id="2_nmjpi"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="3_1y8me"]
 [ext_resource type="PackedScene" uid="uid://dkty7wx8nv28w" path="res://level2exit_area.tscn" id="3_n7ypv"]
 [ext_resource type="PackedScene" uid="uid://dx0mrg54htqlg" path="res://collectible.tscn" id="4_n7ypv"]
+[ext_resource type="PackedScene" uid="uid://0jd02ln5yjw0" path="res://Points.tscn" id="6_0s5r2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nmjpi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -765,6 +766,14 @@ transform = Transform3D(58.060047, 0, 0, 0, 1, 0, 0, 0, 49.61054, 187.62933, -8.
 [node name="collectible" parent="Borders" instance=ExtResource("4_n7ypv")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 224.09163, -8.9079685, 62.805367)
 
+[node name="CSGBox3D86" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(20.062918, 0, 0, 0, 1, 0, 0, 0, 12.174993, 148.98584, 1.2777929, -6.1029315)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D86"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D86/StaticBody3D"]
+shape = SubResource("BoxShape3D_nmjpi")
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="enemy" parent="Enemies" instance=ExtResource("3_1y8me")]
@@ -860,3 +869,9 @@ horizontal_alignment = 1
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-7.430936e-08, 0, -0.99999994, 0, 1.9000001, 0, 1.7, 0, -4.3711385e-08, 18.860252, 2.348194, 0)
 texture = SubResource("ViewportTexture_nmjpi")
+
+[node name="collectible" parent="." instance=ExtResource("6_0s5r2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 148.30072, 2.4798172, -4.5132203)
+
+[node name="collectible2" parent="." instance=ExtResource("6_0s5r2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 254.16393, -5.428901, 61.749863)

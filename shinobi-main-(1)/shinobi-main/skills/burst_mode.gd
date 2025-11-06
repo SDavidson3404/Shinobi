@@ -2,6 +2,7 @@ extends Button
 @export var skill_id: String = "burst_mode"
 
 func _ready():
+	
 	SkillManager.connect("skills_loaded", Callable(self, "update_visual"))
 	update_visual()
 

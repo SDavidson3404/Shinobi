@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://b4q1his2ytle7"]
 
-[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://Shinobi-main/player/player.tscn" id="1_q4otm"]
+[ext_resource type="PackedScene" uid="uid://cvjeo6jpukr3s" path="res://shinobi-main/player/player.tscn" id="1_q4otm"]
 [ext_resource type="PackedScene" uid="uid://c4agx32tn4sc1" path="res://enemy.tscn" id="2_1aoan"]
 [ext_resource type="PackedScene" uid="uid://dx0mrg54htqlg" path="res://collectible.tscn" id="3_71d8t"]
 [ext_resource type="PackedScene" uid="uid://cgalxrhsb3eqe" path="res://healing_pot.tscn" id="4_nxusl"]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=64 format=3 uid="uid://cvjeo6jpukr3s"]
 
-[ext_resource type="Script" uid="uid://bf605vrowvkit" path="res://shinobi-main/player/character_body_3d.gd" id="1_4flbx"]
-[ext_resource type="PackedScene" uid="uid://drpv24ht71em8" path="res://shinobi-main/weapons/sword.tscn" id="2_onrkg"]
-[ext_resource type="PackedScene" uid="uid://r313xctl4x75" path="res://shinobi-main/weapons/spear.tscn" id="3_i3pqv"]
-[ext_resource type="Script" uid="uid://bp447q6yytmcb" path="res://shinobi-main/weapons/spear.gd" id="4_hqtel"]
-[ext_resource type="PackedScene" uid="uid://csfp6ewp2b2sh" path="res://shinobi-main/weapons/dagger.tscn" id="5_0mygi"]
-[ext_resource type="Script" uid="uid://dbsga1xteuqqd" path="res://shinobi-main/player/potency.gd" id="5_2hs0m"]
+[ext_resource type="Script" uid="uid://bf605vrowvkit" path="res://Shinobi-main/player/character_body_3d.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://drpv24ht71em8" path="res://Shinobi-main/weapons/sword.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://r313xctl4x75" path="res://Shinobi-main/weapons/spear.tscn" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://bp447q6yytmcb" path="res://Shinobi-main/weapons/spear.gd" id="4_hqtel"]
+[ext_resource type="PackedScene" uid="uid://csfp6ewp2b2sh" path="res://Shinobi-main/weapons/dagger.tscn" id="5_0mygi"]
+[ext_resource type="Script" uid="uid://dbsga1xteuqqd" path="res://Shinobi-main/player/potency.gd" id="5_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://uthfian4bqg6" path="res://UI_health.png" id="6_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dxpauhs2kblt" path="res://red.png" id="8_3ofce"]
 
@@ -1907,6 +1907,33 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_s8jfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.565088, -0.0698066, -0.530107)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.2803211, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_4h0in"]
 resource_name = "swing"
 tracks/0/type = "value"
@@ -2048,33 +2075,6 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_s8jfq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.565088, -0.0698066, -0.530107)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.2803211, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fxekg"]
 _data = {
 &"H1": SubResource("Animation_phwx1"),
@@ -2208,7 +2208,7 @@ libraries = {
 }
 
 [node name="Spear" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("3_i3pqv")]
-transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.98199713, 0, -1.4695008, 0.18888961, 0.5447607, 0, -0.5725565)
+transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.9819971, 0, -1.4695008, 0.1888896, 0.5447607, 0, -0.5725565)
 visible = false
 script = ExtResource("4_hqtel")
 light_damage = 10
@@ -2239,6 +2239,7 @@ libraries = {
 
 [node name="Dagger" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("5_0mygi")]
 transform = Transform3D(0.99999845, 0, 0, 0, 0.10124156, 1.0562986, 0, -0.33867937, 0.31575975, 0.565088, -0.0698066, -0.530107)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects/Weapon holster/Dagger"]
 libraries = {

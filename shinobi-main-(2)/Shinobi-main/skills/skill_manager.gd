@@ -1,7 +1,7 @@
 extends Node
 
 var skills = {}
-var player_points := 40
+var player_points := 0
 var init := false
 
 func load_skills():
@@ -85,7 +85,7 @@ func save_skills():
 	}
 
 	var json = JSON.stringify(save_data)  # <-- use JSON.stringify() instead of to_json()
-	var file = FileAccess.open("user://test7.json", FileAccess.ModeFlags.WRITE)
+	var file = FileAccess.open("user://skills.json", FileAccess.ModeFlags.WRITE)
 	if file:
 		file.store_string(json)
 		file.close()
@@ -96,7 +96,7 @@ signal skills_loaded
 func load_skills_state():
 	load_skills() # ALWAYS populate keys first
 	
-	var file_path = "user://test7.json"
+	var file_path = "user://skills.json"
 	if FileAccess.file_exists(file_path):
 		var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 		if file:
@@ -112,7 +112,6 @@ func load_skills_state():
 					if skills.has(key):
 						skills[key]["unlocked"] = saved_skills[key]["unlocked"]
 	emit_signal("skills_loaded")
-
 
 
 func is_unlocked(skill_id: String) -> bool:

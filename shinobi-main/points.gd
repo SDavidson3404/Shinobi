@@ -1,0 +1,8 @@
+extends Area3D
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		SkillManager.player_points += 1
+		SkillManager.save_skills()
+		queue_free()

@@ -24,10 +24,13 @@ func _on_body_entered(body: Node) -> void:
 		if body.is_in_group("player"):
 			# Change to next level
 			change_to_next_scene()
-			# Give player points
-			SkillManager.player_points += 3
+			if not LevelManager.levels_completed["level_2"]:
+				# Give player points
+				SkillManager.player_points += 3
 			# Save points
 			SkillManager.save_skills()
+			# Set level to done
+			LevelManager.levels_completed["level_2"] = true
 
 # ====================
 # CHANGE SCENE

@@ -11,17 +11,18 @@ class_name Player
 @onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D # Camera
 @onready var grapple_ray: RayCast3D = $RayCast3D # Raycast for grappling hook
 @onready var weapon_holster: Node3D = $"Orientation/aspects/Weapon holster" # Holster for all weapons
-@onready var stamina_bar: ProgressBar = $"../UI/StaminaBar" # Stamina Bar on UI
-@onready var healthbar: ProgressBar = $"../UI/Healthbar" # Health Bar on UI
 @onready var sword: Node3D = $"Orientation/aspects/Weapon holster/Sword" # Player's sword
 @onready var spear: Node3D = $"Orientation/aspects/Weapon holster/Spear" # Player's spear
 @onready var sprite_3d: Sprite3D = $CameraPivot/Sprite3D # Message to say you picked up collectible
 @onready var v_box: VBoxContainer = $CameraPivot/VBoxContainer # Pause Menu
-@onready var red: Sprite2D = $"../UI/red" # Red screen for burst mode
-@onready var recharged: Label = $"../UI/Recharged" # UI saying burst mode is recharged
-@onready var needs: Label = $"../UI/needs" # UI saying burst mode needs to recharge
-@onready var game_saved: Label = $"../UI/Game Saved" # UI saying game was saved
 @onready var dagger: Node3D = $"Orientation/aspects/Weapon holster/Dagger" # Player's dagger
+@onready var springarm: SpringArm3D = $CameraPivot/SpringArm3D # Springarm for camera
+@onready var healthbar: ProgressBar = $UI/Healthbar # Health bar
+@onready var stamina_bar: ProgressBar = $UI/StaminaBar # Stamina bar
+@onready var game_saved: Label = $"UI/Game Saved" # Label to denote game was saved
+@onready var needs: Label = $UI/needs # Label to denote burst mode needs to recharge
+@onready var recharged: Label = $UI/Recharged # Label to denote burst mode is recharged
+@onready var red: Sprite2D = $UI/red # Red screen for burst mode
 
 # ========================
 # SAVE
@@ -108,7 +109,7 @@ var q = PhysicsRayQueryParameters3D.new() # Creates a Raycast to check for walls
 # DODGE
 # ==========================
 @export var dodge_speed: float = 35.0 # Speed of movement during dodge
-@export var dodge_duration: float = 0.10 # Duration of movement during dodge
+@export var dodge_duration: float = 0.25 # Duration of movement during dodge
 @export var dodge_cooldown: float = 0.6 # Cooldown between dodges
 @export var dodge_stamina_cost: float = 25.0 # Stamina cost for dodge
 @export var dodge_invincibility_time: float = 0.2 # How long invincibility lasts during dodge
@@ -196,9 +197,11 @@ func _ready() -> void:
 	var save_data = {
 		"current_level" : scene_to_save,
 		"skills" : SkillManager.skills,
-		"Points" : SkillManager.player_points
+		"Points" : SkillManager.player_points,
+		"levels" : LevelManager.levels_completed,
+		"collectibles" : CollectibleManager.collected_items
 	}
-	var file_path = "res://save_game.json"
+	var file_path = "user://save_game.json"
 	var file = FileAccess.open(file_path, FileAccess.ModeFlags.WRITE)
 	if file:
 		var json_string = JSON.stringify(save_data)  # Convert dictionary to JSON string
@@ -451,12 +454,15 @@ func cancel_grapple() -> void: is_grappling = false
 # Handles logic for dodge
 func try_dodge() -> void:
 	# Sets camera to not clip into player
-	$CameraPivot/SpringArm3D.collision_mask = 0
+	springarm.collision_mask = 2
 	# If is dodging, grappling, cooldown timer is active, or not enough stamina, then set camera back and do nothing else
-	if is_dodging or is_grappling or dodge_cooldown_timer > 0 or current_stamina < dodge_stamina_cost:
-		$CameraPivot/SpringArm3D.collision_mask = 1
+	if is_dodging or is_grappling or dodge_cooldown_timer > 0:
+		return
+	if current_stamina < dodge_stamina_cost:
+		springarm.collision_mask = 1
 		return
 	# Get dodge direction based on input
+	springarm.spring_length = 2.0  # Pull camera closer
 	var input_dir = Vector2(
 		Input.get_action_strength("D") - Input.get_action_strength("A"),
 		Input.get_action_strength("W") - Input.get_action_strength("S")
@@ -506,7 +512,9 @@ func handle_dodge(delta: float) -> void:
 	# If dodge timer is 0 or less, set dodging to false and sets camera to normal
 	if dodge_timer <= 0.0:
 		is_dodging = false
-		$CameraPivot/SpringArm3D.collision_mask = 1
+		await get_tree().create_timer(0.1).timeout
+		springarm.spring_length = 3.0  # Restore springarm length to normal
+		springarm.collision_mask = 1 # Set collision mask back
 
 # ==========================
 # TAKING DAMAGE

@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://cttmjkjlnm0xy"]
+
+[ext_resource type="Texture2D" uid="uid://uthfian4bqg6" path="res://UI_health.png" id="1_il3u1"]
+[ext_resource type="Script" uid="uid://bvouk16w4t62t" path="res://level_select.gd" id="1_vomi7"]
+
+[node name="Level Select" type="Node2D"]
+script = ExtResource("1_vomi7")
+
+[node name="UI Design" type="Sprite2D" parent="."]
+position = Vector2(338, 578)
+texture = ExtResource("1_il3u1")
+
+[node name="World 1" type="VBoxContainer" parent="."]
+offset_left = 62.0
+offset_top = 97.0
+offset_right = 124.0
+offset_bottom = 198.0
+scale = Vector2(3, 3)
+
+[node name="Level 1" type="Button" parent="World 1"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level 2" type="Button" parent="World 1"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level 3" type="Button" parent="World 1"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="World 2" type="VBoxContainer" parent="."]
+offset_left = 278.0
+offset_top = 97.0
+offset_right = 340.0
+offset_bottom = 198.0
+scale = Vector2(3, 3)
+
+[node name="Level 4" type="Button" parent="World 2"]
+layout_mode = 2
+text = "Level 4"
+
+[node name="Level 5" type="Button" parent="World 2"]
+layout_mode = 2
+text = "Level 5"
+
+[node name="Level 6" type="Button" parent="World 2"]
+layout_mode = 2
+text = "Level 6"
+
+[node name="World 3" type="VBoxContainer" parent="."]
+offset_left = 492.0
+offset_top = 97.00001
+offset_right = 554.0
+offset_bottom = 198.0
+scale = Vector2(3, 3)
+
+[node name="Level 7" type="Button" parent="World 3"]
+layout_mode = 2
+text = "Level 7"
+
+[node name="Level 8" type="Button" parent="World 3"]
+layout_mode = 2
+text = "Level 8"
+
+[node name="Level 9" type="Button" parent="World 3"]
+layout_mode = 2
+text = "Level 9"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 775.0
+offset_top = 167.0
+offset_right = 865.0
+offset_bottom = 221.0
+scale = Vector2(3, 3)
+text = "LEVEL 10"
+
+[connection signal="button_down" from="World 1/Level 1" to="." method="_on_level_1_button_down"]
+[connection signal="button_down" from="World 1/Level 2" to="." method="_on_level_2_button_down"]
+[connection signal="button_down" from="World 1/Level 3" to="." method="_on_level_3_button_down"]
+[connection signal="button_down" from="World 2/Level 4" to="." method="_on_level_4_button_down"]
+[connection signal="button_down" from="World 2/Level 5" to="." method="_on_level_5_button_down"]
+[connection signal="button_down" from="World 2/Level 6" to="." method="_on_level_6_button_down"]
+[connection signal="button_down" from="World 3/Level 7" to="." method="_on_level_7_button_down"]
+[connection signal="button_down" from="World 3/Level 8" to="." method="_on_level_8_button_down"]
+[connection signal="button_down" from="World 3/Level 9" to="." method="_on_level_9_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

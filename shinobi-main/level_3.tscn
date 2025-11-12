@@ -32,12 +32,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6808054, 1.7361302, 17.4628
 
 [node name="Borders" type="Node" parent="."]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Borders"]
-transform = Transform3D(32.538883, 0, 0, 0, 1, 0, 0, 0, 52.801834, 0, 0, 0)
+[node name="CSGBox3D85" type="CSGBox3D" parent="Borders"]
+transform = Transform3D(2.650032e-06, 4.3711392e-08, 53.435894, -2.6500313e-06, 1.0000001, -2.335758e-06, -60.625683, -4.371139e-08, 2.3357572e-06, 0.16667175, -0.25670242, 2.2573395)
+layers = 3
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Borders/CSGBox3D85"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borders/CSGBox3D85/StaticBody3D"]
 shape = SubResource("BoxShape3D_1fhj5")
 
 [node name="Boss1" parent="." instance=ExtResource("2_1fhj5")]

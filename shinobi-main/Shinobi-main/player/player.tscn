@@ -2208,7 +2208,7 @@ libraries = {
 }
 
 [node name="Spear" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("3_i3pqv")]
-transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.981997, 0, -1.4695008, 0.18888958, 0.5447607, 0, -0.5725565)
+transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.98199695, 0, -1.4695008, 0.18888956, 0.5447607, 0, -0.5725565)
 visible = false
 script = ExtResource("4_hqtel")
 light_damage = 10
@@ -2261,9 +2261,9 @@ Strength and Health
 Increased!"
 horizontal_alignment = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="Player"]
 
-[node name="Healthbar" type="ProgressBar" parent="UI"]
+[node name="Healthbar" type="ProgressBar" parent="Player/UI"]
 modulate = Color(0.8912906, 4.1873755e-06, 8.663535e-07, 1)
 offset_left = 148.0
 offset_top = 532.0
@@ -2272,7 +2272,7 @@ offset_bottom = 578.0
 value = 100.0
 show_percentage = false
 
-[node name="StaminaBar" type="ProgressBar" parent="UI"]
+[node name="StaminaBar" type="ProgressBar" parent="Player/UI"]
 modulate = Color(0, 0.9177924, 0, 1)
 offset_left = 153.0
 offset_top = 596.0
@@ -2281,7 +2281,7 @@ offset_bottom = 623.0
 value = 100.0
 show_percentage = false
 
-[node name="Potency" type="ProgressBar" parent="UI"]
+[node name="Potency" type="ProgressBar" parent="Player/UI"]
 visible = false
 modulate = Color(0, 0.63529414, 1, 1)
 offset_left = 5.000003
@@ -2294,24 +2294,24 @@ step = 1.0
 show_percentage = false
 script = ExtResource("5_2hs0m")
 
-[node name="Game Saved" type="Label" parent="UI"]
+[node name="Game Saved" type="Label" parent="Player/UI"]
 visible = false
 offset_right = 299.0
 offset_bottom = 187.0
 text = "Game Saved Successfully!"
 
-[node name="UI Design" type="Sprite2D" parent="UI"]
+[node name="UI Design" type="Sprite2D" parent="Player/UI"]
 position = Vector2(338, 578)
 texture = ExtResource("6_2hs0m")
 
-[node name="red" type="Sprite2D" parent="UI"]
+[node name="red" type="Sprite2D" parent="Player/UI"]
 visible = false
 modulate = Color(1, 1, 1, 0.31764707)
 position = Vector2(572.625, 321.99997)
 scale = Vector2(2.5374475, 2.3716216)
 texture = ExtResource("8_3ofce")
 
-[node name="Recharged" type="Label" parent="UI"]
+[node name="Recharged" type="Label" parent="Player/UI"]
 visible = false
 offset_left = 970.0
 offset_top = 10.0
@@ -2321,7 +2321,7 @@ theme_override_font_sizes/font_size = 30
 text = "Burst Mode
 Recharged!"
 
-[node name="needs" type="Label" parent="UI"]
+[node name="needs" type="Label" parent="Player/UI"]
 visible = false
 offset_left = 1006.0
 offset_top = 12.0

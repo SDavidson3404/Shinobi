@@ -4,13 +4,10 @@ signal skills_loaded
 
 # ======= VARIABLES =======
 var skills = {} # Create dictionary for skills
-var player_points := 40 # Current points
+var player_points := 0 # Current points
 var init := false # Checks if Initialized
 
-# ========= LOAD SKILLS =========
-# Function to load the skills the first time
 func load_skills():
-	# Modify dictionary to include all skills
 	skills = {
 		"dodge": {"unlocked": false, "prereq": [], "cost": 1},
 		"double_jump": {"unlocked": false, "prereq": ["dodge"], "cost": 2},

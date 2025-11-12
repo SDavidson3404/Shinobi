@@ -12,12 +12,12 @@ signal collected # Signal to emit when collecting a collectible
 # Runs when scene is loaded
 func _ready() -> void:
 	await get_tree().process_frame # Wait for a frame
-	custom_minimum_size = Vector2(101.5, 75.0)
+	custom_minimum_size = Vector2(101.5, 74.5)
 	set_pivot_offset(Vector2(0, 0))  # top-left pivot
 	# Position of bar relative to screen size
-	anchor_left = 0.0
+	anchor_left = 0.005
 	anchor_top = 0.9
-	anchor_right = 0.0
+	anchor_right = 0.005
 	anchor_bottom = 0.9
 	rotation_degrees = -45 # Rotation
 	show_percentage = false # No percentage

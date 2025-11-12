@@ -21,7 +21,8 @@ Collectible="*res://collectible.gd"
 Potency="*res://Shinobi-main/player/potency.gd"
 SceneManager="*res://sceneManager.gd"
 SkillManager="*res://Shinobi-main/skills/skill_manager.gd"
-MainMenu="*res://main_menu.gd"
+LevelManager="*res://Level_Manager.gd"
+CollectibleManager="*res://Collectible_Manager.gd"
 
 [input]
 

@@ -1,0 +1,16 @@
+extends Node
+
+var init = false
+
+var levels_completed = {
+	"level_1" : false,
+	"level_2" : false,
+	"level_3" : false,
+	"level_4" : false,
+	"level_5" : false,
+	"level_6" : false,
+	"level_7" : false,
+	"level_8" : false,
+	"level_9" : false,
+	"level_10" : false,
+}

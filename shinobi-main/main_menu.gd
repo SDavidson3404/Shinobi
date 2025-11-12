@@ -4,6 +4,8 @@ extends Node2D
 # VARIABLES
 # ====================
 var saved_level = 0 # Saved level
+@onready var no_save: Label = $NO_SAVE_FILE_FOUND
+@onready var save_deleted: Label = $SAVE_DELETED
 
 # ====================
 # READY
@@ -41,13 +43,14 @@ func _on_settings_button_down() -> void: SceneManager.change_scene("res://Settin
 # Loads saved level upon pressed
 func _on_load_button_down() -> void:
 	# Save file path as variable
-	var file_path = "res://save_game.json"
+	var file_path = "user://save_game.json"
 	# If file exists
 	if FileAccess.file_exists(file_path):
 		# Open file in read mode
 		var file = FileAccess.open(file_path, FileAccess.ModeFlags.READ)
 		# If file is valid
-		if file:
+		var content = file.get_as_text().strip_edges()
+		if not content.is_empty():
 			# Save text as variable
 			var text = file.get_as_text()
 			# Close file
@@ -74,3 +77,38 @@ func _on_load_button_down() -> void:
 					if SkillManager.skills.has(skill_name):
 						# If is unlocked, set to unlocked
 						SkillManager.skills[skill_name]["unlocked"] = saved_skills[skill_name]["unlocked"]
+				var saved_levels = save_data.get("levels", {})
+				for level in saved_levels.keys():
+					if LevelManager.levels_completed.has(level):
+						LevelManager.levels_completed[level] = saved_levels[level]
+				var saved_collectibles = save_data.get("collectibles", {})
+				for collectible in saved_collectibles.keys():
+					if CollectibleManager.collected_items.has(collectible):
+						CollectibleManager.collected_items[collectible] = saved_collectibles[collectible]
+		else:
+			no_save.visible = true
+			await get_tree().create_timer(1).timeout
+			no_save.visible = false
+
+func _on_delete_save_button_down() -> void:
+	var file_path = "user://save_game.json"
+	var file_path2 = "user://skills.json"
+	if FileAccess.file_exists(file_path):
+		var file = FileAccess.open(file_path, FileAccess.ModeFlags.WRITE)
+		var file2 = FileAccess.open(file_path2, FileAccess.ModeFlags.WRITE)
+		var content = file.get_as_text().strip_edges()
+		var content2 = file2.get_as_text().strip_edges()
+		if not content.is_empty() or content2.is_empty():
+			file.close()
+			file2.close()
+			save_deleted.visible = true
+			await get_tree().create_timer(1).timeout
+			save_deleted.visible = false
+		else:
+			no_save.visible = true
+			await get_tree().create_timer(1).timeout
+			no_save.visible = false
+
+
+func _on_level_select_button_down() -> void:
+	SceneManager.change_scene("level_select.tscn")

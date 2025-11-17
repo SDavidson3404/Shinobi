@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg02bbmqpd07n"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f35cj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a8swx"]
+
+[node name="Boss1" type="Node3D"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="Boss1" type="CharacterBody3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boss1"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_f35cj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss1"]
+shape = SubResource("CapsuleShape3D_a8swx")
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 1135.0
+offset_bottom = 42.0
+max_value = 500.0
+value = 500.0
+metadata/_edit_use_anchors_ = true

@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://chhnks62medfc"]
-
-[node name="Level 4" type="Node3D"]
-
-[node name="Borders" type="Node" parent="."]

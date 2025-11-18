@@ -197,7 +197,7 @@ func take_damage(amount: int):
 # Runs to kill boss
 func die(): 
 	queue_free() # Delete the node
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(.5).timeout
 	SceneManager.change_scene("level_4.tscn")
 
 # ========================

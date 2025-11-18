@@ -38,7 +38,7 @@ var skill_data := {
 	},
 	"burst_mode" : {
 		"name": "Burst Mode",
-		"cost": 5,
+		"cost": 4,
 		"prereq": ["dagger_unlock"]
 	},
 	"stamina1" : {

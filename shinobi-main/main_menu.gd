@@ -98,7 +98,7 @@ func _on_delete_save_button_down() -> void:
 		var file2 = FileAccess.open(file_path2, FileAccess.ModeFlags.WRITE)
 		var content = file.get_as_text().strip_edges()
 		var content2 = file2.get_as_text().strip_edges()
-		if not content.is_empty() or not content2.is_empty():
+		if not content.is_empty() and not content2.is_empty():
 			file.close()
 			file2.close()
 			save_deleted.visible = true

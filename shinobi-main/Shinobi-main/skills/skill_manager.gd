@@ -16,7 +16,7 @@ func load_skills():
 		"weapon_throw": {"unlocked": false, "prereq": ["wall_scramble"], "cost": 5},
 		"spear_unlock": {"unlocked": false, "prereq": ["dodge"], "cost": 1},
 		"dagger_unlock": {"unlocked": false, "prereq": ["spear_unlock"], "cost": 3},
-		"burst_mode": {"unlocked": false, "prereq": ["dagger_unlock"], "cost": 5},
+		"burst_mode": {"unlocked": false, "prereq": ["dagger_unlock"], "cost": 4},
 		"stamina1": {"unlocked": false, "prereq": ["dodge"], "cost": 1},
 		"stamina2": {"unlocked": false, "prereq": ["stamina1"], "cost": 2},
 		"stamina3": {"unlocked": false, "prereq": ["stamina2"], "cost": 3},

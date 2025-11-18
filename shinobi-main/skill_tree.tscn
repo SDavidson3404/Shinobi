@@ -46,7 +46,7 @@
 [node name="Line2D" type="Line2D" parent="lines"]
 modulate = Color(0, 0, 0, 1)
 visibility_layer = 2
-points = PackedVector2Array(986, 510, 990, 411, 999, 330, 1009, 235, 999, 162, 869, 210, 842, 326, 835, 506)
+points = PackedVector2Array(990, 413, 990, 411, 999, 330, 1009, 235, 999, 162, 869, 210, 842, 326, 835, 506)
 
 [node name="Line2D2" type="Line2D" parent="lines"]
 points = PackedVector2Array(992, 150, 65, 154, 85, 228, 79, 314, 79, 393, 91, 472)
@@ -253,10 +253,10 @@ Cost: 4"
 script = ExtResource("29_kawdl")
 
 [node name="Weapon Throw" type="Button" parent="lines"]
-offset_left = 953.0
-offset_top = 492.0
-offset_right = 1078.0
-offset_bottom = 546.0
+offset_left = 781.0
+offset_top = 485.0
+offset_right = 906.0
+offset_bottom = 539.0
 text = "Weapon Throw
 Cost: 5"
 script = ExtResource("30_yi45k")
@@ -280,12 +280,12 @@ Cost: 3"
 script = ExtResource("32_ujxd3")
 
 [node name="Burst Mode" type="Button" parent="lines"]
-offset_left = 804.0
-offset_top = 491.0
-offset_right = 902.0
-offset_bottom = 545.0
+offset_left = 795.0
+offset_top = 394.0
+offset_right = 893.0
+offset_bottom = 448.0
 text = "Burst Mode
-Cost: 5"
+Cost: 4"
 script = ExtResource("33_b1oig")
 
 [node name="Health1" type="Button" parent="lines"]
@@ -1508,6 +1508,8 @@ script = ExtResource("36_wh4i1")
 [connection signal="button_down" from="lines/Text for upgrades/Spear Unlock/Cancel" to="lines/Spear Unlock" method="_on_cancel_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Dagger Unlock/Buy" to="lines/Dagger Unlock" method="_on_buy_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Dagger Unlock/Cancel" to="lines/Dagger Unlock" method="_on_cancel_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Burst Mode/Buy" to="lines/Burst Mode" method="_on_buy_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Burst Mode/Cancel" to="lines/Burst Mode" method="_on_cancel_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Health Upgrade 1/Buy" to="lines/Health1" method="_on_buy_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Health Upgrade 1/Cancel" to="lines/Health1" method="_on_cancel_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Health Upgrade 2/Buy" to="lines/Health2" method="_on_buy_button_down"]
@@ -1552,4 +1554,10 @@ script = ExtResource("36_wh4i1")
 [connection signal="button_down" from="lines/Text for upgrades/Dull Dagger/Cancel" to="lines/Dull Dagger" method="_on_cancel_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Sharp Dagger/Buy" to="lines/Sharp Dagger" method="_on_buy_button_down"]
 [connection signal="button_down" from="lines/Text for upgrades/Sharp Dagger/Cancel" to="lines/Sharp Dagger" method="_on_cancel_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Iron Dagger/Buy" to="lines/Iron Dagger" method="_on_buy_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Iron Dagger/Cancel" to="lines/Iron Dagger" method="_on_cancel_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Gem Dagger/Buy" to="lines/Gem Dagger" method="_on_buy_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Gem Dagger/Cancel" to="lines/Gem Dagger" method="_on_cancel_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Buster Dagger/Buy" to="lines/Buster Dagger" method="_on_buy_button_down"]
+[connection signal="button_down" from="lines/Text for upgrades/Buster Dagger/Cancel" to="lines/Buster Dagger" method="_on_cancel_button_down"]
 [connection signal="button_down" from="Back to game" to="Back to game" method="_on_button_down"]

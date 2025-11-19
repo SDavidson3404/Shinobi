@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0jd02ln5yjw0"]
+
+[ext_resource type="Script" uid="uid://dxf4k8wy0imrq" path="res://Shinobi-main/points/points.gd" id="1_yeeec"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8orai"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fk142"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yciwo"]
+
+[node name="collectible" type="Area3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_yeeec")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_8orai")
+surface_material_override/0 = SubResource("StandardMaterial3D_fk142")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yciwo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

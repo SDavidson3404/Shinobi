@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkty7wx8nv28w"]
+
+[ext_resource type="Script" uid="uid://cug5ys7q5wdx0" path="res://level2Exit.gd" id="1_iocoq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3b4ro"]
+
+[node name="Exit area" type="Area3D"]
+script = ExtResource("1_iocoq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3b4ro")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

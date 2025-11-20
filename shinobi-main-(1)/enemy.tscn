@@ -94,7 +94,7 @@ mesh = SubResource("CapsuleMesh_4gyqm")
 skeleton = NodePath("../..")
 
 [node name="EnemySword" parent="Orientation/Skeleton" instance=ExtResource("2_4gyqm")]
-transform = Transform3D(-0.99576473, -0.08753221, -0.028113624, 0, 0.305795, -0.9520972, 0.09193618, -0.94806516, -0.3044999, -0.8928443, 0, -0.69087255)
+transform = Transform3D(-0.99576473, -0.08753221, -0.028113622, 0, 0.305795, -0.9520971, 0.09193618, -0.94806516, -0.3044999, -0.8928443, 0, -0.69087255)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

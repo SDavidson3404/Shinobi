@@ -2173,7 +2173,7 @@ text = "Skill Tree (WILL RESET LEVEL) "
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.99409795, 0.10848518, 0, -0.10848518, 0.99409795, 0, -0.28614315, 0.19568917)
 light_energy = 5.055
-spot_range = 18.926382
+spot_range = 80.938774
 
 [node name="Sprite3D" type="Sprite3D" parent="Player/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.99409807, 0.10848518, 0, -0.10848518, 0.99409807, 0, 1.5238346, 0.038049456)
@@ -2204,7 +2204,7 @@ libraries = {
 }
 
 [node name="Spear" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("3_i3pqv")]
-transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.9819969, 0, -1.4695008, 0.18888956, 0.5447607, 0, -0.5725565)
+transform = Transform3D(0.9999991, 0, 0, 0, 0.28266215, 0.98199683, 0, -1.4695008, 0.18888955, 0.5447607, 0, -0.5725565)
 visible = false
 script = ExtResource("4_hqtel")
 light_damage = 10

@@ -480,22 +480,26 @@ func take_damage(amount: int) -> void:
 	if healthbar: healthbar.value = health
 	# If health is zero or less, reload scene
 	if health <= 0:
-		var current_scene = get_tree().current_scene.name
-		if current_scene == "tutorial":
-			current_scene = "tutorial"
-		if current_scene == "level 1":
-			current_scene = "level_1"
-		elif current_scene == "level 2":
-			current_scene = "level_2"
-		elif current_scene == "level_3":
-			current_scene = "level_3"
-		elif current_scene == "Level 4":
-			current_scene = "level_4"
-		elif current_scene == "level5":
-			current_scene = "level_5"
-		elif current_scene == "Level 6":
-			current_scene = "level_6"
-		SceneManager.change_scene(current_scene + ".tscn")
+		die()
+		
+func die():
+	var current_scene = get_tree().current_scene.name
+	if current_scene == "tutorial":
+		current_scene = "tutorial"
+	if current_scene == "level 1":
+		current_scene = "level_1"
+	elif current_scene == "level 2":
+		current_scene = "level_2"
+	elif current_scene == "level_3":
+		current_scene = "level_3"
+	elif current_scene == "Level 4":
+		current_scene = "level_4"
+	elif current_scene == "level5":
+		current_scene = "level_5"
+	elif current_scene == "Level 6":
+		current_scene = "level_6"
+	await get_tree().create_timer(1).timeout
+	SceneManager.change_scene(current_scene + ".tscn")
 
 # ==========================
 # HEALING

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh6fpt6nj76tr"]
+
+[ext_resource type="Texture2D" uid="uid://uthfian4bqg6" path="res://UI_health.png" id="1_5spt1"]
+
+[node name="Victory + credits" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 330.0
+offset_top = 238.0
+offset_right = 792.0
+offset_bottom = 431.0
+theme_override_font_sizes/font_size = 33
+text = "Thank you For Playing!!!
+
+Created by: Sydney Davidson
+UI Created by: Alex Davidson"
+
+[node name="UI Design" type="Sprite2D" parent="."]
+position = Vector2(338, 578)
+texture = ExtResource("1_5spt1")

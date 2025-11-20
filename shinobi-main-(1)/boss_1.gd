@@ -6,11 +6,11 @@ signal died
 # ========================
 # SETTINGS
 # ========================
-@export var max_health: int = 500 # Max health
+@export var max_health: int = 250 # Max health
 @export var move_speed: float = 4.0 # Speed of movement
 @export var attack_range: float = 5.0 # Range at which boss can attack
 @export var attack_cooldown: float = 2.0 # Cooldown between attacks
-@export var recover_amount: int = 100 # Amount healed when recovering
+@export var recover_amount: int = 50 # Amount healed when recovering
 @export var recover_time: float = 2.5 # recovery time
 @export var can_recover_below_hp: int = 250 # Can recover below this health
 @export var damage: int = 20 # Amount of damage
@@ -21,7 +21,7 @@ signal died
 # ========================
 @onready var player: Player = null # Player as variable
 @onready var anim_player: AnimationPlayer = $AnimationPlayer # Animation player for animations
-@onready var healthbar: ProgressBar = $"../Healthbar" # Healthbar
+@onready var healthbar: ProgressBar = $Healthbar
 
 # ========================
 # STATE VARIABLES
@@ -33,6 +33,7 @@ var GRAVITY = -24.8 # Gravity factor
 var recover_timer = 0.0 # Timer for recovery
 var has_healed = false # Checks if healed
 var hit_enemies = [] # Keeps hit enemies per swing
+var can_damage = false
 
 # ========================
 # READY
@@ -102,7 +103,7 @@ func attack_state(delta):
 	if health <= can_recover_below_hp:
 			return
 	# If health is lower than half, change state to recover
-	if health <= 250:
+	if health <= 125:
 		change_state("recover")
 
 # ========================
@@ -255,13 +256,17 @@ func recover_state(delta):
 		# Change state to phase 2
 		change_state("phase2")
 
+func enable_damage(): can_damage = true
+
+func disable_damage(): can_damage = false
+
 # ========================
 # ON BODY ENTERED
 # ========================
 # Runs when body hits hitbox
 func _on_enemy_sword_body_entered(body: Node3D) -> void:
 	# If body is in hit_enemies, do nothing
-	if body in hit_enemies:
+	if body in hit_enemies or not can_damage:
 		return
 	# If body is in player group
 	if body.is_in_group("player"):

@@ -117,6 +117,8 @@ func handle_ai_movement(delta):
 		orientation.rotation.y = lerp_angle(orientation.rotation.y, target_yaw, delta * 5.0)
 	# if distance is less than attack range:
 	if distance <= attack_range:
+		var target_yaw = atan2(-to_player.x, -to_player.z)
+		orientation.rotation.y = lerp_angle(orientation.rotation.y, target_yaw, delta * 5.0)
 		# Try attack
 		try_attack()
 	# Otherwise

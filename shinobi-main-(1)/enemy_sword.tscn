@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dajmdap35dg88"]
+
+[ext_resource type="Script" uid="uid://p2nndp1dp0ho" path="res://enemy_sword.gd" id="1_gqwtb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o8xsq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74bdg"]
+albedo_color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4ynd"]
+size = Vector3(0.23297119, 2.659439, 0.15893555)
+
+[node name="enemy sword" type="Area3D"]
+script = ExtResource("1_gqwtb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12297771, 0, 0, 0, 2.1536977, 0, 0, 0, 0.13511792, 0, 0, 0)
+mesh = SubResource("BoxMesh_o8xsq")
+surface_material_override/0 = SubResource("StandardMaterial3D_74bdg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007965088, 0.41626745, 0.00012207031)
+shape = SubResource("BoxShape3D_e4ynd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

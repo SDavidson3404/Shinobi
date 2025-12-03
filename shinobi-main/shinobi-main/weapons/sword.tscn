@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://drpv24ht71em8"]
+
+[ext_resource type="Script" uid="uid://btvs1gmcy4g6s" path="res://shinobi-main/weapons/sword.gd" id="1_74bdg"]
+[ext_resource type="PackedScene" uid="uid://dsv5wbqug3j1i" path="res://shinobi-main/Models/buster sword.blend" id="2_b3x5x"]
+[ext_resource type="PackedScene" uid="uid://3gq4dujni87v" path="res://shinobi-main/Models/Forged sword.blend" id="3_b0eb4"]
+[ext_resource type="PackedScene" uid="uid://bctp7jr17o4i8" path="res://shinobi-main/Models/Sharp sword.blend" id="4_qb0c4"]
+[ext_resource type="PackedScene" uid="uid://ccoeadp5f4p17" path="res://shinobi-main/Models/Steel sword.blend" id="5_okefo"]
+[ext_resource type="PackedScene" uid="uid://dhk4i1qf8qylw" path="res://shinobi-main/Models/dull sword.blend" id="6_ux76j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o8xsq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74bdg"]
+albedo_color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4ynd"]
+size = Vector3(0.23297119, 2.162384, 0.15893555)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_74bdg")
+
+[node name="Base Sword" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12297771, 0, 0, 0, 2.1536977, 0, 0, 0, 0.13511792, 0, 0, 0)
+mesh = SubResource("BoxMesh_o8xsq")
+surface_material_override/0 = SubResource("StandardMaterial3D_74bdg")
+
+[node name="hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007965088, 0.16773993, 0.00012207031)
+shape = SubResource("BoxShape3D_e4ynd")
+
+[node name="ComboTimer" type="Timer" parent="."]
+
+[node name="buster sword" parent="." instance=ExtResource("2_b3x5x")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.7209742, 0)
+visible = false
+
+[node name="Forged sword" parent="." instance=ExtResource("3_b0eb4")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, -0.7097739, 0)
+visible = false
+
+[node name="Sharp sword" parent="." instance=ExtResource("4_qb0c4")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.775377, 0)
+visible = false
+
+[node name="Steel sword" parent="." instance=ExtResource("5_okefo")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, -0.7863647, 0)
+visible = false
+
+[node name="dull sword" parent="." instance=ExtResource("6_ux76j")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.8277606, 0)
+visible = false

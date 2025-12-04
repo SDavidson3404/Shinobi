@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://beqnpen42c4ut"]
+
+[ext_resource type="Script" uid="uid://u42gt4jka23q" path="res://boss_1.gd" id="1_2nlvs"]
+[ext_resource type="PackedScene" uid="uid://dajmdap35dg88" path="res://enemy_sword.tscn" id="2_y66il"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4gyqm"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2nlvs"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_2nlvs"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.065203555, 0.53333336, 0.73333335, 0.8, 0.88228554, 0.9943542),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.8928444, -0.23458004, 0.5230576), Vector3(-0.58748794, -0.23458004, 0.5230576), Vector3(-0.58748794, -0.23458004, 0.5230576), Vector3(-1.0311244, -0.23458004, -0.2246151), Vector3(-0.58748794, -0.23458004, -0.8109411), Vector3(-0.91664255, -0.23458004, -0.24615377), Vector3(-0.8928444, -0.23458004, 0.5230576)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.028526554, 0.046865053, 0.065203555, 0.53333336, 0.56666666, 0.60109526, 0.63777226, 0.6866749, 0.73333335, 0.7641041, 0.8, 0.88228554, 0.9515643, 0.9943542),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(-1.1845534, -0.07469864, 3.1231275), Vector3(-1.1845535, 0.37798744, 3.1231275), Vector3(-1.1845534, 0.47640646, 3.1231275), Vector3(-1.1845534, 0.61528236, 3.1231275), Vector3(-1.1845534, 0.61528236, 3.1231275), Vector3(-1.1845534, 0.8987587, 3.1231275), Vector3(-1.1845537, -0.17885996, 3.1231275), Vector3(-1.1845535, -0.50809884, 3.1231275), Vector3(-1.1845535, -0.98420715, 3.1231275), Vector3(-1.1845535, -0.992131, 3.1231275), Vector3(-1.1845534, -2.0202346, 3.1231275), Vector3(-1.1845534, 2.2824209, 3.1231275), Vector3(-1.1845534, -2.6942632, 3.1231275), Vector3(-1.1845535, -0.6663477, 3.1231275), Vector3(-1.1845534, -0.07469864, 3.1231275)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orientation/Skeleton/EnemySword")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56666666, 0.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable_damage"
+}, {
+"args": [],
+"method": &"disable_damage"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_y66il"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.8928444, -0.23458004, 0.5230576)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.1845534, -0.07469864, 3.1231275)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y66il"]
+_data = {
+&"RESET": SubResource("Animation_y66il"),
+&"attack": SubResource("Animation_2nlvs")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qi2p4"]
+
+[node name="Boss1" type="CharacterBody3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_2nlvs")
+
+[node name="Orientation" type="Node3D" parent="."]
+
+[node name="Skeleton" type="MeshInstance3D" parent="Orientation"]
+mesh = SubResource("CapsuleMesh_4gyqm")
+skeleton = NodePath("../..")
+
+[node name="EnemySword" parent="Orientation/Skeleton" instance=ExtResource("2_y66il")]
+transform = Transform3D(-0.99576515, -0.087532274, -0.028113624, 0.0069556446, -0.37664694, 0.9263309, -0.0916727, 0.9222132, 0.37566027, -0.8928444, -0.23458004, 0.5230576)
+
+[node name="Sprite3D" type="Sprite3D" parent="Orientation/Skeleton"]
+transform = Transform3D(-0.39999998, 0, 8.742278e-08, 0, 0.5, 0, -3.4969112e-08, 0, -1, -0.118762374, 0.24947858, 0)
+texture = SubResource("ViewportTexture_2nlvs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y66il")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_qi2p4")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+modulate = Color(0, 1, 1, 1)
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 443.0
+offset_bottom = 28.0
+max_value = 300.0
+value = 300.0
+show_percentage = false

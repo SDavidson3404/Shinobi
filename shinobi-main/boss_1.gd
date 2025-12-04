@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Enemy
+class_name Boss
 
 signal enemy_killed
 
@@ -11,8 +11,8 @@ signal enemy_killed
 @export var speed: float = 5.0 # Speed of movement
 @export var attack_range: float = 2.0 # Range where can attack
 @export var damage: int = 10 # Damage of enemy
-@export var health: int = 70 # Current health
-@export var max_health: int = 70 # Max health
+@export var health: int = 300 # Current health
+@export var max_health: int = 300 # Max health
 @export var knockback_decay: float = 8.0 # Decay of knockback
 @export var detection_range: float = 7.5 # How far the enemy can "see" the player
 @export var forget_range: float = 15.0 # Stop chasing if player goes beyond this distance
@@ -23,6 +23,7 @@ signal enemy_killed
 @onready var anim_player: AnimationPlayer = $AnimationPlayer # Animation player for animations
 @onready var sword = $Orientation/Skeleton/EnemySword # Sword of enemy
 @onready var orientation = $Orientation # Orientation of the enemy
+@onready var bar: ProgressBar = $SubViewport/ProgressBar
 
 # =================
 # VARIABLES
@@ -41,6 +42,7 @@ var is_staggered = false
 # =================
 # Runs on load
 func _ready():
+	bar.value = health
 	# Add enemy to group
 	add_to_group("enemies")
 	# Get player
@@ -159,11 +161,7 @@ func play_animation(anim_name: String):
 func take_damage(amount: int) -> void:
 	# Lower health by amount
 	health -= amount
-	if anim_player.has_animation("stagger"):
-		is_staggered = true
-		anim_player.stop()
-		anim_player.play("stagger")
-		is_staggered = false
+	bar.value = health
 	# If health is 0, die
 	if health <= 0: die()
 

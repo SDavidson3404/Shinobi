@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjxo6sw0f3dvv"
-path="res://.godot/imported/Drawer.blend-e55e488387a9e0f7b696e88541358ac2.scn"
+uid="uid://bgyuxf3ijmn1r"
+path="res://.godot/imported/sharp spear.blend-998efc989b90df04e0e074d06baf3aad.scn"
 
 [deps]
 
-source_file="res://Shinobi-main/Models/Drawer.blend"
-dest_files=["res://.godot/imported/Drawer.blend-e55e488387a9e0f7b696e88541358ac2.scn"]
+source_file="res://Shinobi-main/Models/sharp spear.blend"
+dest_files=["res://.godot/imported/sharp spear.blend-998efc989b90df04e0e074d06baf3aad.scn"]
 
 [params]
 

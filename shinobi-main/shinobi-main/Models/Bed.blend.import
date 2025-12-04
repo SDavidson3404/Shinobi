@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dy8qkys8rv5j1"
-path="res://.godot/imported/Bed.blend-4b6171d14e8b229a2c94d047ec0d087c.scn"
+path="res://.godot/imported/Bed.blend-59e0800e77a1aea3bcba122db59892dd.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/Bed.blend"
-dest_files=["res://.godot/imported/Bed.blend-4b6171d14e8b229a2c94d047ec0d087c.scn"]
+source_file="res://Shinobi-main/Models/Bed.blend"
+dest_files=["res://.godot/imported/Bed.blend-59e0800e77a1aea3bcba122db59892dd.scn"]
 
 [params]
 

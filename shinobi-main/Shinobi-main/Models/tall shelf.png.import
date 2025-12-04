@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs33hqy724isk"
-path="res://.godot/imported/pngtree-round-shadow-black-shadow-png-image_4330246.png-1d5d235ce34b5f939678906d6de2b450.ctex"
+uid="uid://dghhrhtp2pxk0"
+path="res://.godot/imported/tall shelf.png-8e97c44bab334073663f7cc99056eeeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pngtree-round-shadow-black-shadow-png-image_4330246.png"
-dest_files=["res://.godot/imported/pngtree-round-shadow-black-shadow-png-image_4330246.png-1d5d235ce34b5f939678906d6de2b450.ctex"]
+source_file="res://Shinobi-main/Models/tall shelf.png"
+dest_files=["res://.godot/imported/tall shelf.png-8e97c44bab334073663f7cc99056eeeb.ctex"]
 
 [params]
 

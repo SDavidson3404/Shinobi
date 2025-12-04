@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://leud230tnjyf"
-path="res://.godot/imported/base.blend-05f47f3132042042f1104ca1d1f8b4ac.scn"
+path="res://.godot/imported/base.blend-0b42a4c201054048a4d99b43a9a162d3.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/base.blend"
-dest_files=["res://.godot/imported/base.blend-05f47f3132042042f1104ca1d1f8b4ac.scn"]
+source_file="res://Shinobi-main/Models/base.blend"
+dest_files=["res://.godot/imported/base.blend-0b42a4c201054048a4d99b43a9a162d3.scn"]
 
 [params]
 

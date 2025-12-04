@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjxo6sw0f3dvv"
-path="res://.godot/imported/Drawer.blend-e55e488387a9e0f7b696e88541358ac2.scn"
+uid="uid://cgpeo0nn1j8nr"
+path="res://.godot/imported/Tutorial.blend-d079aa227335666a01cd39ec78f4374e.scn"
 
 [deps]
 
-source_file="res://Shinobi-main/Models/Drawer.blend"
-dest_files=["res://.godot/imported/Drawer.blend-e55e488387a9e0f7b696e88541358ac2.scn"]
+source_file="res://Shinobi-main/Models/Tutorial.blend"
+dest_files=["res://.godot/imported/Tutorial.blend-d079aa227335666a01cd39ec78f4374e.scn"]
 
 [params]
 

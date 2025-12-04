@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ccoeadp5f4p17"
-path="res://.godot/imported/Steel sword.blend-2c797717f9d092ab5de92e597f828c77.scn"
+path="res://.godot/imported/Steel sword.blend-bf7944d3efbd9ebacab200d7017cfdac.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/Steel sword.blend"
-dest_files=["res://.godot/imported/Steel sword.blend-2c797717f9d092ab5de92e597f828c77.scn"]
+source_file="res://Shinobi-main/Models/Steel sword.blend"
+dest_files=["res://.godot/imported/Steel sword.blend-bf7944d3efbd9ebacab200d7017cfdac.scn"]
 
 [params]
 

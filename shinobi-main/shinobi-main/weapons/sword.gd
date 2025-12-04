@@ -7,11 +7,8 @@ signal hit_landed # Signal that hit landed
 # === NODES ===
 @onready var anim: AnimationPlayer = $AnimationPlayer # Animations for sword
 @onready var area: Area3D = $hitbox # Hitbox of sword
-@onready var buster_sword: Node3D = $"buster sword" # Sword Tier 6
-@onready var forged_sword: Node3D = $"Forged sword" # Sword Tier 4
-@onready var sharp_sword: Node3D = $"Sharp sword" # Sword Tier 3
-@onready var steel_sword: Node3D = $"Steel sword" # Sword Tier 5
-@onready var dull_sword: Node3D = $"dull sword" # Sword Tier 2
+@onready var buster_sword: Node3D = $"buster sword" # Sword Tier 3
+@onready var sharp_sword: Node3D = $"Sharp sword" # Sword Tier 2
 @onready var base_sword: MeshInstance3D = $"Base Sword" # Sword Tier 1
 
 # === HITPAUSE ===
@@ -234,16 +231,13 @@ func enable_damage_window() -> void:
 func update_model():
 	var swords = {
 		"buster_sword": buster_sword,
-		"steel_sword": steel_sword,
-		"forged_sword": forged_sword,
 		"sharp_sword": sharp_sword,
-		"dull_sword": dull_sword,
 		"base_sword": base_sword
 	}
 	# Default: base sword
 	var active = "base_sword"
 	# Find first unlocked sword in priority order
-	for sword_name in ["buster_sword", "steel_sword", "forged_sword", "sharp_sword", "dull_sword"]:
+	for sword_name in ["buster_sword", "sharp_sword"]:
 		if SkillManager.check_unlocked(sword_name):
 			active = sword_name
 			break
@@ -255,15 +249,6 @@ func update_damage():
 	if SkillManager.check_unlocked("buster_sword"):
 		light_damage = 12
 		heavy_damage = 15
-	elif SkillManager.check_unlocked("steel_sword"):
-		light_damage = 11
-		heavy_damage = 14
-	elif SkillManager.check_unlocked("forged_sword"):
-		light_damage = 10
-		heavy_damage = 13
 	elif SkillManager.check_unlocked("sharp_sword"):
 		light_damage = 9
 		heavy_damage = 12
-	elif SkillManager.check_unlocked("dull_sword"):
-		light_damage = 8
-		heavy_damage = 11

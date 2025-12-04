@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://sceneManager.gd"
 SkillManager="*res://Shinobi-main/skills/skill_manager.gd"
-Skills="*res://shinobi-main/skills/skills.gd"
 
 [input]
 

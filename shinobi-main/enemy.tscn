@@ -5,7 +5,80 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4gyqm"]
 
+[sub_resource type="Animation" id="Animation_4gyqm"]
+resource_name = "attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.017315472, 0.03732058, 0.051946416, 0.06997609, 0.08657736, 0.10485481, 0.12409422, 0.14461726, 0.1673829, 0.18950823, 0.20874764, 0.23325363, 0.25107434, 0.26742786, 0.28089544, 0.3, 0.33333334, 0.36666667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.8928443, 0, -0.69087255), Vector3(-0.8928443, 0.10691244, -0.649216), Vector3(-0.8928443, 0.23043174, -0.6010888), Vector3(-0.8928443, 0.3207373, -0.5659028), Vector3(-0.8928443, 0.43205953, -0.52252805), Vector3(-0.8928443, 0.47513372, -0.42430085), Vector3(-0.8928443, 0.52255696, -0.31615603), Vector3(-0.8928443, 0.57247615, -0.20231938), Vector3(-0.8928443, 0.62572587, -0.080887675), Vector3(-0.8928443, 0.62572587, -0.021881282), Vector3(-0.8928443, 0.62572587, 0.03546554), Vector3(-0.8928443, 0.62572587, 0.085332274), Vector3(-0.8928443, 0.62572587, 0.14884949), Vector3(-0.8359579, 0.62572587, -0.101221025), Vector3(-0.78375494, 0.62572587, -0.330703), Vector3(-0.7407644, 0.62572587, -0.5196878), Vector3(-0.6797797, 0.62572587, -0.7877741), Vector3(-0.6797797, 0.62572587, -0.7877741), Vector3(-0.48881125, -0.031414628, -0.7877741), Vector3(-0.8928443, 0, -0.69087255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.017315472, 0.03732058, 0.051946416, 0.06997609, 0.08657736, 0.10485481, 0.12409422, 0.14461726, 0.1673829, 0.18950823, 0.20874764, 0.23325363, 0.25107434, 0.26742786, 0.28089544, 0.3, 0.33333334, 0.36666667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(1.260023, -3.0495265, 0), Vector3(1.1613873, -3.0616245, -0.013587723), Vector3(1.0474305, -3.075602, -0.029286046), Vector3(0.9641161, -3.085821, -0.04076317), Vector3(0.8614121, -3.0984182, -0.054911338), Vector3(0.72736514, -3.1015518, -0.06054385), Vector3(0.5797839, -3.1050017, -0.06674506), Vector3(0.42443532, -3.1086333, -0.073272645), Vector3(0.25872207, -3.112507, -0.08023575), Vector3(0.11003137, -3.1123688, -0.08454296), Vector3(-0.034477353, -3.1122346, -0.088729024), Vector3(-0.16013706, -3.1121178, -0.09236908), Vector3(-0.32019472, -3.1119692, -0.09700555), Vector3(-0.120750904, -3.1116314, -0.09110051), Vector3(0.06227243, -3.1113212, -0.085681625), Vector3(0.21299732, -3.1110659, -0.081219025), Vector3(0.4268095, -3.1107035, -0.07488856), Vector3(1.0385791, 2.8040974, -0.039902642), Vector3(1.1759742, 0.2451035, -2.4664443), Vector3(1.260023, -3.0495265, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orientation/Skeleton/EnemySword")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.23333333, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"enable_damage"
+}, {
+"args": [],
+"method": &"disable_damage"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_qi2p4"]
+resource_name = "stagger"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orientation/Skeleton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.7034923), Vector3(0, 0, 0.7034923), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orientation/Skeleton:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333334, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.40805802, 0, 0), Vector3(0.40805802, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iifgy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -56,106 +129,11 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4gyqm"]
-resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Orientation/Skeleton/EnemySword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.46666667, 0.6333333, 0.97),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.8928443, 0, -0.69087255), Vector3(-0.8928443, 0.6275271, -0.108849406), Vector3(0.24090612, -0.07208705, -1.1439571), Vector3(-0.8928443, 0, -0.69087255)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.46666667, 0.6333333, 0.97),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1.260023, -3.0495265, 0), Vector3(0.3791667, -3.111325, -0.076472685), Vector3(1.0983698, -0.8428731, 2.9988496), Vector3(1.260023, -3.0495265, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Orientation/Skeleton/EnemySword")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.43333334, 0.6666667),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"enable_damage"
-}, {
-"args": [],
-"method": &"disable_damage"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_iifgy"]
-resource_name = "stagger"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Orientation/Skeleton:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.43528014, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.9788153), Vector3(0, 0, 0.9788153), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Orientation/Skeleton:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.43528014, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.55305994, 0, 0), Vector3(0.55305994, 0, 0), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Orientation/Skeleton/EnemySword:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.43528014, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.8928443, 0, -0.69087255), Vector3(-1.1020502, 0, -0.69087255), Vector3(-1.1020502, 0, -0.69087255), Vector3(-0.8928443, 0, -0.69087255)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Orientation/Skeleton/EnemySword:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.43528014, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1.260023, -3.0495265, 0), Vector3(1.0261633, -1.8599372, 0.66080683), Vector3(1.0261633, -1.8599372, 0.66080683), Vector3(1.260023, -3.0495265, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iifgy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epg4t"]
 _data = {
-&"RESET": SubResource("Animation_qi2p4"),
+&"RESET": SubResource("Animation_iifgy"),
 &"attack": SubResource("Animation_4gyqm"),
-&"stagger": SubResource("Animation_iifgy")
+&"stagger": SubResource("Animation_qi2p4")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qi2p4"]
@@ -166,15 +144,16 @@ script = ExtResource("1_7k104")
 [node name="Orientation" type="Node3D" parent="."]
 
 [node name="Skeleton" type="MeshInstance3D" parent="Orientation"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_4gyqm")
 skeleton = NodePath("../..")
 
 [node name="EnemySword" parent="Orientation/Skeleton" instance=ExtResource("2_4gyqm")]
-transform = Transform3D(-0.99576485, -0.08753221, -0.02811362, 0, 0.305795, -0.952097, 0.091936186, -0.94806516, -0.30449983, -0.8928443, 0, -0.69087255)
+transform = Transform3D(-0.99576515, -0.08753218, -0.028113613, 0, 0.30579492, -0.95209676, 0.091936216, -0.94806486, -0.30449978, -0.8928443, 0, -0.69087255)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_iifgy")
+&"": SubResource("AnimationLibrary_epg4t")
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

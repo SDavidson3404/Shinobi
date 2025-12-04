@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dhk4i1qf8qylw"
-path="res://.godot/imported/dull sword.blend-9b1c5b8ffe87224a9c4e4b7ff9df793f.scn"
+path="res://.godot/imported/dull sword.blend-6be0c141a6e9c86431eabfb2ca4f91bc.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/dull sword.blend"
-dest_files=["res://.godot/imported/dull sword.blend-9b1c5b8ffe87224a9c4e4b7ff9df793f.scn"]
+source_file="res://Shinobi-main/Models/dull sword.blend"
+dest_files=["res://.godot/imported/dull sword.blend-6be0c141a6e9c86431eabfb2ca4f91bc.scn"]
 
 [params]
 

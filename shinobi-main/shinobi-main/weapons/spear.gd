@@ -7,6 +7,9 @@ signal hit_landed # Signal that hit landed
 # === NODES ===
 @onready var anim: AnimationPlayer = $AnimationPlayer # Animations for dagger
 @onready var area: Area3D = $hitbox # Hitbox of dagger
+@onready var ultima_spear: Node3D = $"ultima spear"
+@onready var sharp_spear: Node3D = $"sharp spear"
+@onready var base_spear: MeshInstance3D = $MeshInstance3D
 
 # === HITPAUSE ===
 var hitpause_count = 0 # Amount of hitpauses
@@ -62,21 +65,8 @@ func _ready() -> void:
 	# Connect to body entering hitbox
 	area.body_entered.connect(_on_hitbox_body_entered)
 	# Checks if you have weapon upgrades and sets damage
-	if SkillManager.check_unlocked("the_ultima_spear"):
-		light_damage = 15
-		heavy_damage = 20
-	elif SkillManager.check_unlocked("gilded_spear"):
-		light_damage = 14
-		heavy_damage = 19
-	elif SkillManager.check_unlocked("steel_spear"):
-		light_damage = 13
-		heavy_damage = 18
-	elif SkillManager.check_unlocked("sharp_spear"):
-		light_damage = 12
-		heavy_damage = 17
-	elif SkillManager.check_unlocked("dull_spear"):
-		light_damage = 11
-		heavy_damage = 16
+	update_damage()
+	
 
 # ========================
 # ATTACK FUNCTION
@@ -96,7 +86,7 @@ func attack(is_heavy: bool = false) -> void:
 	if player.current_stamina < cost: return
 	# Reduce current stamina by cost
 	player.current_stamina -= cost
-	# If you cannot chain or are attacking, do nothing
+	# If you cannot chain and are attacking, do nothing
 	if not can_chain and is_attacking: return
 	# Save attack type as character in attack map.
 	var type_char: String = "H" if is_heavy else "L"
@@ -247,3 +237,28 @@ func enable_damage_window() -> void:
 	hit_enemies.clear() # Clear hit enemies
 	can_damage = true # Set damage to true
 	area.monitoring = true # Set monitoring to true
+
+func update_model():
+	var swords = {
+		"the_ultima_spear": ultima_spear,
+		"sharp_spear": sharp_spear,
+		"base_spear": base_spear
+	}
+	# Default: base sword
+	var active = "base_spear"
+	# Find first unlocked sword in priority order
+	for sword_name in ["sharp_spear", "the_ultima_spear"]:
+		if SkillManager.check_unlocked(sword_name):
+			active = sword_name
+			break
+	# Toggle visibility
+	for title in swords:
+		swords[title].visible = (title == active)
+
+func update_damage():
+	if SkillManager.check_unlocked("the_ultima_spear"):
+		light_damage = 15
+		heavy_damage = 20
+	elif SkillManager.check_unlocked("sharp_spear"):
+		light_damage = 12
+		heavy_damage = 17

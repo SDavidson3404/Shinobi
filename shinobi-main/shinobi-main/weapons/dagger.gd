@@ -7,6 +7,9 @@ signal hit_landed # Signal that hit landed
 # === NODES ===
 @onready var anim: AnimationPlayer = $AnimationPlayer # Animations for dagger
 @onready var area: Area3D = $hitbox # Hitbox of dagger
+@onready var base_dagger: MeshInstance3D = $MeshInstance3D
+@onready var sharp_dagger: Node3D = $"sharpa dagger"
+@onready var pure_dagger: Node3D = $"pure dagger"
 
 # === HITPAUSE ===
 var hitpause_count = 0 # Amount of hitpauses
@@ -62,21 +65,7 @@ func _ready() -> void:
 	# Connect to body entering hitbox
 	area.body_entered.connect(_on_hitbox_body_entered)
 	# Checks if you have weapon upgrades and sets damage
-	if SkillManager.check_unlocked("buster_dagger"):
-		light_damage = 9
-		heavy_damage = 11
-	elif SkillManager.check_unlocked("gem_dagger"):
-		light_damage = 8
-		heavy_damage = 10
-	elif SkillManager.check_unlocked("iron_dagger"):
-		light_damage = 7
-		heavy_damage = 9
-	elif SkillManager.check_unlocked("sharp_dagger"):
-		light_damage = 6
-		heavy_damage = 9
-	elif SkillManager.check_unlocked("dull_dagger"):
-		light_damage = 5
-		heavy_damage = 8
+	update_damage()
 
 # ========================
 # ATTACK FUNCTION
@@ -246,3 +235,28 @@ func enable_damage_window() -> void:
 	hit_enemies.clear() # Clear hit enemies
 	can_damage = true # Set damage to true
 	area.monitoring = true # Set monitoring to true
+
+func update_model():
+	var swords = {
+		"pure_dagger": pure_dagger,
+		"sharp_dagger": sharp_dagger,
+		"base_dagger": base_dagger
+	}
+	# Default: base sword
+	var active = "base_dagger"
+	# Find first unlocked sword in priority order
+	for sword_name in ["sharp_dagger", "pure_dagger"]:
+		if SkillManager.check_unlocked(sword_name):
+			active = sword_name
+			break
+	# Toggle visibility
+	for title in swords:
+		swords[title].visible = (title == active)
+
+func update_damage():
+	if SkillManager.check_unlocked("pure_dagger"):
+		light_damage = 9
+		heavy_damage = 11
+	elif SkillManager.check_unlocked("sharp_dagger"):
+		light_damage = 6
+		heavy_damage = 9

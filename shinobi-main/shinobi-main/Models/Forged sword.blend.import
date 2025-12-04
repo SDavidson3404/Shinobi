@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://3gq4dujni87v"
-path="res://.godot/imported/Forged sword.blend-55a8fc589abafbe9b07fe1186c342557.scn"
+path="res://.godot/imported/Forged sword.blend-8ee0c10e7e204f7a739c6faef2cabbcd.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/Forged sword.blend"
-dest_files=["res://.godot/imported/Forged sword.blend-55a8fc589abafbe9b07fe1186c342557.scn"]
+source_file="res://Shinobi-main/Models/Forged sword.blend"
+dest_files=["res://.godot/imported/Forged sword.blend-8ee0c10e7e204f7a739c6faef2cabbcd.scn"]
 
 [params]
 

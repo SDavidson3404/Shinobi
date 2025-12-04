@@ -1,11 +1,11 @@
 [gd_scene load_steps=64 format=3 uid="uid://cvjeo6jpukr3s"]
 
-[ext_resource type="Script" uid="uid://bf605vrowvkit" path="res://shinobi-main/player/character_body_3d.gd" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://dtib4rrakwgnv" path="res://shinobi-main/skills/skills.gd" id="2_i8xf7"]
-[ext_resource type="PackedScene" uid="uid://drpv24ht71em8" path="res://shinobi-main/weapons/sword.tscn" id="2_onrkg"]
-[ext_resource type="PackedScene" uid="uid://r313xctl4x75" path="res://shinobi-main/weapons/spear.tscn" id="3_i3pqv"]
-[ext_resource type="Script" uid="uid://bp447q6yytmcb" path="res://shinobi-main/weapons/spear.gd" id="4_hqtel"]
-[ext_resource type="PackedScene" uid="uid://csfp6ewp2b2sh" path="res://shinobi-main/weapons/dagger.tscn" id="5_0mygi"]
+[ext_resource type="Script" uid="uid://bf605vrowvkit" path="res://Shinobi-main/player/character_body_3d.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dtib4rrakwgnv" path="res://Shinobi-main/skills/skills.gd" id="2_i8xf7"]
+[ext_resource type="PackedScene" uid="uid://drpv24ht71em8" path="res://Shinobi-main/weapons/sword.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://r313xctl4x75" path="res://Shinobi-main/weapons/spear.tscn" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://bp447q6yytmcb" path="res://Shinobi-main/weapons/spear.gd" id="4_hqtel"]
+[ext_resource type="PackedScene" uid="uid://csfp6ewp2b2sh" path="res://Shinobi-main/weapons/dagger.tscn" id="5_0mygi"]
 [ext_resource type="Texture2D" uid="uid://uthfian4bqg6" path="res://UI_health.png" id="6_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dxpauhs2kblt" path="res://red.png" id="8_3ofce"]
 [ext_resource type="Script" uid="uid://cfvbp246ac6dp" path="res://label.gd" id="34_b3n7t"]
@@ -40,10 +40,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16666667, 0.36666667, 0.6333333, 0.8333333, 0.9, 0.93333334, 1, 1.1333333, 1.4666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.040742334, 1.4401798, -0.74519384), Vector3(0.010914319, 1.4922873, -0.08559234), Vector3(0.048320867, 1.5300202, 0.39205012), Vector3(0.087508686, 1.5695499, 0.8924376), Vector3(0.13025899, 1.6126733, 1.4383147), Vector3(0.13025899, 2.0314913, 1.4383146), Vector3(0.13025899, -3.069228, 1.4383146), Vector3(0.13025902, -1.5817051, 1.4383146), Vector3(0.13025899, -0.94070834, 1.4383146), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"times": PackedFloat32Array(0, 0.16666667, 0.36666667, 0.6333333, 0.831916, 0.9016896, 0.93031466, 0.93333334, 1.0018773, 1.1333333, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.040742334, 1.4401798, -0.74519384), Vector3(0.010914319, 1.4922873, -0.08559234), Vector3(0.048320867, 1.5300202, 0.39205012), Vector3(0.087508686, 1.5695499, 0.8924376), Vector3(1.1572764, 1.6735287, 1.5231825), Vector3(1.3701311, -3.0916634, 3.0334463), Vector3(1.4647086, -2.4441192, 2.2678814), Vector3(0.13025899, -3.069228, 1.4383146), Vector3(1.3195615, 1.5783093, -1.6957563), Vector3(0.13025899, -0.94070834, 1.4383146), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -88,10 +88,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.64, 0.77, 0.88, 1.01, 1.5),
+"times": PackedFloat32Array(0, 0.64943117, 0.7657205, 0.885588, 1.01, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.040742334, 1.4401798, -0.74519384), Vector3(0.130259, 0.4378923, 1.4383146), Vector3(0.16881168, -0.65133953, 0.95874125), Vector3(0.20143315, -1.5729977, 0.5529483), Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"update": 1,
+"values": [Vector3(-0.040742334, 1.4401798, -0.74519384), Vector3(-1.0557592, 0.78486896, 0.6381763), Vector3(-0.8112414, -0.9509799, 1.8261495), Vector3(-1.2684165, -1.7309225, 0.7156319), Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -136,10 +136,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.53333336, 0.81, 1.27),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.21647705, 0.5295637, 0.8333333, 1.27),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(-0.6852418, -2.500908, 0.005244284), Vector3(0.5924346, -1.634296, 0.80521464), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"values": [Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(-0.15846325, 1.5666841, 0.33063826), Vector3(0.35405818, 1.713299, 0.16749637), Vector3(0.19079791, 1.5815858, -2.3529882), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -183,10 +183,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.93),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(-0.19762868, -0.9405343, 1.084102), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"times": PackedFloat32Array(0, 0.0375704, 0.24, 0.93),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0.20143306, -2.6496215, 0.5529485), Vector3(1.2127831, 2.8874555, -0.108029984), Vector3(-0.19762868, -0.9405343, 1.084102), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -230,10 +230,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.35, 0.91),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.03578133, 0.34707892, 0.91),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.13025899, -0.9407084, 1.4383146), Vector3(0.43661177, -2.6969624, 0.89986545), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"values": [Vector3(0.13025899, -0.9407084, 1.4383146), Vector3(-1.1265085, 0.66762644, -0.25133595), Vector3(-1.1215972, -0.41894877, -0.58628285), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -277,10 +277,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.38, 0.96),
+"times": PackedFloat32Array(0, 0.15207066, 0.3846493, 0.96),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.43661177, -2.6969624, 0.8998655), Vector3(0.4366118, -1.8269855, 0.8998655), Vector3(0.32790458, -0.31843412, 2.356855), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"values": [Vector3(0.43661177, -2.6969624, 0.8998655), Vector3(-0.2242426, 1.5367368, -0.6588369), Vector3(-0.20996992, 2.264929, -1.1353457), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -540,10 +540,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.09602084, 0.2, 0.38),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.04992759, 1.4420073, -0.8247264), Vector3(-0.07433589, 1.8839704, -1.0476753), Vector3(-0.10924041, 2.51599, -1.3664986), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"times": PackedFloat32Array(0, 0.04231295, 0.1, 0.2, 0.38),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.04992759, 1.4420073, -0.8247264), Vector3(1.4502633, 1.870029, -1.4114786), Vector3(1.1539314, -2.0841098, 0.7423575), Vector3(-0.10924041, 2.51599, -1.3664986), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -588,10 +588,10 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.032310657, 0.12520379, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.03471832, 0.12368401, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.10924041, 2.51599, -1.3664986), Vector3(0.49131492, 2.0696704, -2.069294), Vector3(0.3642646, 1.4205254, -1.4357367), Vector3(0.26196548, 0.89784306, -0.9256053), Vector3(-0.040742334, 1.4401798, -0.74519384)]
+"values": [Vector3(-0.10924041, 2.51599, -1.3664986), Vector3(-1.2031356, -0.13419133, -0.0057225423), Vector3(-1.3665838, 0.6157929, -0.40762544), Vector3(0.26196548, 0.89784306, -0.9256053), Vector3(-0.040742334, 1.4401798, -0.74519384)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -1411,7 +1411,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.26, 0.46, 0.76666665),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803211, 0, 0), Vector3(-1.2803214, -0.93956304, 0), Vector3(-1.2803214, 0.52014303, 0), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1458,7 +1458,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.26999998, 0.35000002, 0.45000002, 0.71),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, 0.52014303, 0), Vector3(-1.2803214, -0.39072382, 1.5158179e-08), Vector3(-1.2803214, -1.0336887, 2.5858066e-08), Vector3(-1.2803214, -0.35578254, 4.68347e-09), Vector3(-1.2803214, 0.3974464, -1.8843858e-08), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1505,7 +1505,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.12, 0.24, 0.38, 0.48, 0.73),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, 0.35158724, -1.6669569e-08), Vector3(-1.2803214, -0.55101854, -2.3174369e-08), Vector3(-1.2803214, -1.4536242, -2.9679168e-08), Vector3(-1.2803214, -0.6079016, -3.721454e-08), Vector3(-1.2803214, -0.0038141, -4.2596948e-08), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1552,7 +1552,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.21, 0.4, 0.69),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, 0.36687362, -1.7394331e-08), Vector3(-0.8883959, 0.16362904, 0.22533454), Vector3(-0.7489438, -2.6942453, 2.6275873), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1599,7 +1599,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.43333334, 0.74),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, 0.52014303, 0), Vector3(-1.2803214, 0.5201431, 0), Vector3(-1.2803214, -0.56957066, -1.9289008e-08), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1646,7 +1646,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.14, 0.23333333, 0.31, 0.39, 0.63),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, -0.5571887, -1.8869683e-08), Vector3(-1.2803214, -0.9721198, 7.625356e-09), Vector3(-1.2803214, -1.2487404, 2.5288715e-08), Vector3(-1.2803211, -0.26891994, 3.8530363e-08), Vector3(-1.2803211, 0.7535011, 5.234773e-08), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1693,7 +1693,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.21, 0.41, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803214, -0.53861576, -1.8240693e-08), Vector3(-1.2803216, 1.0194049, 8.446919e-09), Vector3(-1.1381378, -2.4781694, 1.4180975), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1740,7 +1740,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.26666668, 0.44, 0.72),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803209, -1.1097327, 1.2355102e-07), Vector3(-0.49528566, -1.4254588, 0.3747789), Vector3(-0.1157892, -1.014121, 2.0370681), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1787,7 +1787,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.29, 0.38, 0.51, 0.73),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-0.1157892, -1.014121, 2.0370681), Vector3(-0.11578923, 0.62682, 2.0370684), Vector3(-0.25569057, -0.25640115, 1.4559032), Vector3(-0.45777026, -1.5321648, 0.6164424), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1834,7 +1834,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.19, 0.4, 0.71),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-0.1157892, -1.014121, 2.0370681), Vector3(-0.559304, -1.4101441, 0.34851006), Vector3(-0.26564416, -1.0237054, 1.8302443), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1881,7 +1881,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.26666668, 0.43, 0.79),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-0.73677355, -0.48224598, -0.15309103), Vector3(-1.3592803, 2.108876, -2.953402), Vector3(-1.3592803, -2.6480365, -2.953402), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -1955,7 +1955,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.17, 0.35, 0.56666666),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803211, 0, 0), Vector3(-1.2803209, 0.5505642, 0), Vector3(-1.2803209, -1.1097327, 1.2355102e-07), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -2002,7 +2002,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.17, 0.34, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-1.2803211, 0, 0), Vector3(-1.1051891, 2.8971832, -2.5480509), Vector3(-0.73677355, -0.48224598, -0.15309103), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -2049,7 +2049,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.13, 0.29, 0.68),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector3(-0.73677355, -0.48224598, -0.15309103), Vector3(-1.1804714, -0.23701297, 1.5552768), Vector3(-1.1804714, -1.7280476, 1.5552768), Vector3(-1.2803211, 0, 0)]
 }
 tracks/2/type = "method"
@@ -2174,121 +2174,50 @@ script = ExtResource("2_i8xf7")
 
 [node name="lines" type="Node2D" parent="Player/CameraPivot/Skill Tree"]
 
-[node name="dull_sword" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 38.0
-offset_top = 123.0
-offset_right = 152.0
-offset_bottom = 177.0
-text = "Dull Sword
-"
-
 [node name="sharp_sword" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 44.0
-offset_top = 237.0
-offset_right = 150.0
-offset_bottom = 291.0
+offset_left = 38.0
+offset_top = 297.0
+offset_right = 144.0
+offset_bottom = 351.0
 text = "Sharp Sword
 "
 
-[node name="forged_sword" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 43.0
-offset_top = 354.0
-offset_right = 159.0
-offset_bottom = 408.0
-text = "Forged Sword
-"
-
-[node name="steel_sword" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 43.0
-offset_top = 453.0
-offset_right = 142.0
-offset_bottom = 507.0
-text = "Steel Sword
-"
-
 [node name="buster_sword" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 37.0
-offset_top = 572.0
-offset_right = 141.0
-offset_bottom = 626.0
+offset_left = 34.0
+offset_top = 407.0
+offset_right = 146.0
+offset_bottom = 461.0
 text = "Buster Sword
 "
 
-[node name="dull_spear" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 200.0
-offset_top = 124.0
-offset_right = 288.0
-offset_bottom = 178.0
-text = "Dull Spear"
-
 [node name="sharp_spear" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 190.0
-offset_top = 235.0
-offset_right = 292.0
-offset_bottom = 289.0
+offset_left = 180.0
+offset_top = 297.0
+offset_right = 282.0
+offset_bottom = 351.0
 text = "Sharp Spear"
 
-[node name="steel_spear" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 197.0
-offset_top = 350.0
-offset_right = 292.0
-offset_bottom = 404.0
-text = "Steel Spear
-"
-
-[node name="gilded_spear" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 186.0
-offset_top = 450.0
-offset_right = 293.0
-offset_bottom = 504.0
-text = "Gilded Spear
-"
-
 [node name="the_ultima_spear" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 165.0
-offset_top = 573.0
-offset_right = 306.0
-offset_bottom = 627.0
+offset_left = 160.0
+offset_top = 407.0
+offset_right = 301.0
+offset_bottom = 461.0
 text = "The Ultima Spear
 "
 
-[node name="dull_dagger" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 337.0
-offset_top = 124.0
-offset_right = 435.0
-offset_bottom = 178.0
-text = "Dull Dagger
-"
-
 [node name="sharp_dagger" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 331.0
-offset_top = 232.0
-offset_right = 444.0
-offset_bottom = 286.0
+offset_left = 328.0
+offset_top = 297.0
+offset_right = 441.0
+offset_bottom = 351.0
 text = "Sharp Dagger
 "
 
-[node name="iron_dagger" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 328.0
-offset_top = 348.0
-offset_right = 434.0
-offset_bottom = 402.0
-text = "Iron Dagger
-"
-
-[node name="gem_dagger" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 332.0
-offset_top = 451.0
-offset_right = 436.0
-offset_bottom = 505.0
-text = "Gem Dagger
-"
-
 [node name="pure_dagger" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 325.0
-offset_top = 575.0
-offset_right = 444.0
-offset_bottom = 629.0
+offset_left = 323.0
+offset_top = 410.0
+offset_right = 442.0
+offset_bottom = 464.0
 text = "Pure Dagger
 "
 
@@ -2350,82 +2279,35 @@ E to use
 "
 
 [node name="health1" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 504.0
-offset_top = 128.0
-offset_right = 586.0
-offset_bottom = 182.0
+offset_left = 492.0
+offset_top = 299.0
+offset_right = 574.0
+offset_bottom = 353.0
 text = "Health +5
 "
 
 [node name="health2" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 495.0
-offset_top = 234.0
-offset_right = 587.0
-offset_bottom = 288.0
+offset_left = 491.0
+offset_top = 407.0
+offset_right = 583.0
+offset_bottom = 461.0
 text = "Health +10
 "
 
-[node name="health3" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 498.0
-offset_top = 346.0
-offset_right = 590.0
-offset_bottom = 400.0
-text = "Health +15
-"
-
-[node name="health4" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 497.0
-offset_top = 453.0
-offset_right = 589.0
-offset_bottom = 507.0
-text = "Health +20
-"
-
-[node name="health5" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 489.0
-offset_top = 574.0
-offset_right = 581.0
-offset_bottom = 628.0
-text = "Health +25
-"
-
 [node name="stamina1" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 611.0
-offset_top = 127.0
-offset_right = 706.0
-offset_bottom = 181.0
+offset_left = 617.0
+offset_top = 302.0
+offset_right = 712.0
+offset_bottom = 356.0
 text = "Stamina +5
 "
 
 [node name="stamina2" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 610.0
-offset_top = 233.0
-offset_right = 714.0
-offset_bottom = 287.0
+offset_left = 614.0
+offset_top = 411.0
+offset_right = 718.0
+offset_bottom = 465.0
 text = "Stamina +10
-"
-
-[node name="stamina3" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 610.0
-offset_top = 346.0
-offset_right = 714.0
-offset_bottom = 400.0
-text = "Stamina +15
-"
-
-[node name="stamina4" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 610.0
-offset_top = 454.0
-offset_right = 714.0
-offset_bottom = 508.0
-text = "Stamina +20"
-
-[node name="stamina5" type="Button" parent="Player/CameraPivot/Skill Tree/lines"]
-offset_left = 612.0
-offset_top = 574.0
-offset_right = 716.0
-offset_bottom = 628.0
-text = "Stamina +25
 "
 
 [node name="Back to game" type="Button" parent="Player/CameraPivot/Skill Tree"]
@@ -2462,7 +2344,8 @@ skeleton = NodePath("../../..")
 [node name="Weapon holster" type="Node3D" parent="Player/Orientation/aspects"]
 
 [node name="Sword" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.12310952, 0.03731596, 0.99065775, -0.6775503, 0.46730068, 0.040731013, -0.7250972, -0.4303227, 0.13013716, 0.5903817, 0.1833002, -0.39630628)
+transform = Transform3D(0.1231095, 0.03731594, 0.990657, -0.67755014, 0.4673004, 0.040730983, -0.725097, -0.43032244, 0.13013706, 0.5903817, 0.1833002, -0.39630628)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects/Weapon holster/Sword"]
 libraries = {
@@ -2499,7 +2382,6 @@ libraries = {
 
 [node name="Dagger" parent="Player/Orientation/aspects/Weapon holster" instance=ExtResource("5_0mygi")]
 transform = Transform3D(0.99999845, 0, 0, 0, 0.10124156, 1.0562986, 0, -0.33867937, 0.31575975, 0.565088, -0.0698066, -0.530107)
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Orientation/aspects/Weapon holster/Dagger"]
 libraries = {
@@ -2524,15 +2406,15 @@ show_percentage = false
 
 [node name="StaminaBar" type="ProgressBar" parent="Player/UI"]
 modulate = Color(0, 0.9177924, 0, 1)
-offset_left = 16.0
-offset_top = 595.0
-offset_right = 441.0
-offset_bottom = 622.0
+offset_left = 14.0
+offset_top = 600.0
+offset_right = 439.0
+offset_bottom = 627.0
 value = 100.0
 show_percentage = false
 
 [node name="UI Design" type="Sprite2D" parent="Player/UI"]
-position = Vector2(204, 576)
+position = Vector2(201, 581)
 texture = ExtResource("6_2hs0m")
 
 [node name="red" type="Sprite2D" parent="Player/UI"]
@@ -2567,20 +2449,11 @@ Recharge"
 [connection signal="button_down" from="Player/CameraPivot/VBoxContainer/Quit to Menu" to="Player" method="_on_quit_to_menu_button_down"]
 [connection signal="button_down" from="Player/CameraPivot/VBoxContainer/Close Menu" to="Player" method="_on_close_menu_button_down"]
 [connection signal="button_down" from="Player/CameraPivot/VBoxContainer/Skill Tree" to="Player" method="_on_skill_tree_button_down"]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/dull_sword" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["dull_sword"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/sharp_sword" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["sharp_sword"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/forged_sword" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["forged_sword"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/steel_sword" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["steel_sword"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/buster_sword" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["pure_sword"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/dull_spear" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["dull_spear"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/sharp_spear" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["sharp_spear"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/steel_spear" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["steel_spear"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/gilded_spear" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["gilded_spear"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/the_ultima_spear" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["the_ultima_spear"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/dull_dagger" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["dull_dagger"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/sharp_dagger" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["sharp_dagger"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/iron_dagger" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["iron_dagger"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/gem_dagger" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["gem_dagger"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/pure_dagger" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["buster_dagger"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/dodge" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["dodge"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/double_jump" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["double_jump"]]
@@ -2591,13 +2464,7 @@ Recharge"
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/burst_mode" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["burst_mode"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/health1" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["health1"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/health2" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["health2"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/health3" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["health3"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/health4" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["health4"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/health5" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["health5"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/stamina1" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["stamina1"]]
 [connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/stamina2" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["stamina2"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/stamina3" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["stamina3"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/stamina4" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["stamina4"]]
-[connection signal="pressed" from="Player/CameraPivot/Skill Tree/lines/stamina5" to="Player/CameraPivot/Skill Tree" method="_pressed" binds= ["stamina5"]]
 [connection signal="button_down" from="Player/CameraPivot/Skill Tree/Back to game" to="Player" method="_on_back_to_game_button_down"]
 [connection signal="button_down" from="Player/CameraPivot/Skill Tree/Back to game" to="Player/CameraPivot/Skill Tree/Back to game" method="_on_button_down"]

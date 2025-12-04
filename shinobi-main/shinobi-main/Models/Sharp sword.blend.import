@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bctp7jr17o4i8"
-path="res://.godot/imported/Sharp sword.blend-93a734ec600a9fb0b6b7e095ca273d10.scn"
+path="res://.godot/imported/Sharp sword.blend-155b99a130a18ddf1ca93789342cefb5.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/Sharp sword.blend"
-dest_files=["res://.godot/imported/Sharp sword.blend-93a734ec600a9fb0b6b7e095ca273d10.scn"]
+source_file="res://Shinobi-main/Models/Sharp sword.blend"
+dest_files=["res://.godot/imported/Sharp sword.blend-155b99a130a18ddf1ca93789342cefb5.scn"]
 
 [params]
 

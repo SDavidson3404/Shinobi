@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://di4j16gko1r6x"
-path="res://.godot/imported/ShortShelf.blend-583d93a82c23a5140d12db302be436b1.scn"
+path="res://.godot/imported/ShortShelf.blend-343b7822c7b5a6a0b7edc51e97c7df4b.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/ShortShelf.blend"
-dest_files=["res://.godot/imported/ShortShelf.blend-583d93a82c23a5140d12db302be436b1.scn"]
+source_file="res://Shinobi-main/Models/ShortShelf.blend"
+dest_files=["res://.godot/imported/ShortShelf.blend-343b7822c7b5a6a0b7edc51e97c7df4b.scn"]
 
 [params]
 

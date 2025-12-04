@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ccgjvj1domvub"
-path="res://.godot/imported/hand.blend-42dfe248d3a1f3e4c959093af4019365.scn"
+path="res://.godot/imported/hand.blend-3794c9565607656c3c889f94b92c0cda.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/hand.blend"
-dest_files=["res://.godot/imported/hand.blend-42dfe248d3a1f3e4c959093af4019365.scn"]
+source_file="res://Shinobi-main/Models/hand.blend"
+dest_files=["res://.godot/imported/hand.blend-3794c9565607656c3c889f94b92c0cda.scn"]
 
 [params]
 

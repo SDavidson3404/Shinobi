@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ovv03hhhfwu6"
-path="res://.godot/imported/SideTable.blend-8caf3b3f5944e9664a864ce766d58df6.scn"
+path="res://.godot/imported/SideTable.blend-6631169701f6c4fff7b87da387e8da1a.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/SideTable.blend"
-dest_files=["res://.godot/imported/SideTable.blend-8caf3b3f5944e9664a864ce766d58df6.scn"]
+source_file="res://Shinobi-main/Models/SideTable.blend"
+dest_files=["res://.godot/imported/SideTable.blend-6631169701f6c4fff7b87da387e8da1a.scn"]
 
 [params]
 

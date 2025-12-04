@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dsv5wbqug3j1i"
-path="res://.godot/imported/buster sword.blend-9081cb9d1d4e9b51714da4afbdb65f25.scn"
+path="res://.godot/imported/buster sword.blend-663cfb91c940e986e718971067770e8d.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/buster sword.blend"
-dest_files=["res://.godot/imported/buster sword.blend-9081cb9d1d4e9b51714da4afbdb65f25.scn"]
+source_file="res://Shinobi-main/Models/buster sword.blend"
+dest_files=["res://.godot/imported/buster sword.blend-663cfb91c940e986e718971067770e8d.scn"]
 
 [params]
 

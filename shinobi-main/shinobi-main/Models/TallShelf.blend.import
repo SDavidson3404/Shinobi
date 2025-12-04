@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c0bjt55sgndnj"
-path="res://.godot/imported/TallShelf.blend-26182f4bc3c55874ed780388a118d372.scn"
+path="res://.godot/imported/TallShelf.blend-b0582eb21697cecf871942042de297d3.scn"
 
 [deps]
 
-source_file="res://shinobi-main/Models/TallShelf.blend"
-dest_files=["res://.godot/imported/TallShelf.blend-26182f4bc3c55874ed780388a118d372.scn"]
+source_file="res://Shinobi-main/Models/TallShelf.blend"
+dest_files=["res://.godot/imported/TallShelf.blend-b0582eb21697cecf871942042de297d3.scn"]
 
 [params]
 

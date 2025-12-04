@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://csfp6ewp2b2sh"]
+[gd_scene load_steps=7 format=3 uid="uid://csfp6ewp2b2sh"]
 
-[ext_resource type="Script" uid="uid://21t2ibllgsff" path="res://shinobi-main/weapons/dagger.gd" id="1_1n5yg"]
+[ext_resource type="Script" uid="uid://21t2ibllgsff" path="res://Shinobi-main/weapons/dagger.gd" id="1_1n5yg"]
+[ext_resource type="PackedScene" uid="uid://bti2x6co2sv71" path="res://Shinobi-main/Models/sharpa dagger.blend" id="2_evfkl"]
+[ext_resource type="PackedScene" uid="uid://drx6fl66teh5i" path="res://Shinobi-main/Models/pure dagger.blend" id="3_48g7n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o8xsq"]
 
@@ -24,3 +26,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_rfb2o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007965088, 0.57168585, 0.00012207031)
 shape = SubResource("BoxShape3D_e4ynd")
+
+[node name="sharpa dagger" parent="." instance=ExtResource("2_evfkl")]
+transform = Transform3D(0.06999599, 0.0019043622, 0, -0.0007489066, 0.17798981, 0, 0, 0, 0.07, 0.026426613, 0.6274553, -0.0041051507)
+visible = false
+
+[node name="pure dagger" parent="." instance=ExtResource("3_48g7n")]
+transform = Transform3D(0.05, 0, 0, 0, 0.127, 0, 0, 0, 0.05, 0.03518647, 0.21794166, 0.010994278)
+visible = false

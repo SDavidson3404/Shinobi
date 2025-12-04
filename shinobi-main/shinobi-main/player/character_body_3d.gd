@@ -438,8 +438,6 @@ func _on_skill_tree_button_down() -> void:
 	v_box.visible = false
 	# Set skill tree visibility to true
 	skill_tree.visible = true
-	# Update Buttons
-	Skills.update_visual()
 
 # ==========================
 # CHECK WALL FOR WALL RUN
@@ -682,16 +680,10 @@ func check_unlocks():
 	can_wall_run = SkillManager.check_unlocked("wall_run")
 	can_climb = SkillManager.check_unlocked("wall_scramble")
 	# Set max health based on unlocks
-	if SkillManager.check_unlocked("health5"): max_health = 175
-	elif SkillManager.check_unlocked("health4"): max_health = 150
-	elif SkillManager.check_unlocked("health3"): max_health = 130
-	elif SkillManager.check_unlocked("health2"): max_health = 115
+	if SkillManager.check_unlocked("health2"): max_health = 115
 	elif SkillManager.check_unlocked("health1"): max_health = 105
 	# Set max stamina based on unlocks
-	if SkillManager.check_unlocked("stamina5"): max_stamina = 175
-	elif SkillManager.check_unlocked("stamina4"): max_stamina = 150
-	elif SkillManager.check_unlocked("stamina3"): max_stamina = 130
-	elif SkillManager.check_unlocked("stamina2"): max_stamina = 115
+	if SkillManager.check_unlocked("stamina2"): max_stamina = 115
 	elif SkillManager.check_unlocked("stamina1"): max_stamina = 105
 	# Update the Model
 	current_weapon.update_model()

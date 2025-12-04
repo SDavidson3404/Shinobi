@@ -29,4 +29,5 @@ func _on_body_entered(body: Node3D) -> void:
 	# If body is in group enemies, do nothing
 	if body.is_in_group("enemies"): return
 	# If body has method take damage, do it.
-	if body.has_method("take_damage"): body.take_damage(damage)
+	if body.has_method("take_damage"): 
+		body.take_damage(damage)

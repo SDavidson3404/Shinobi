@@ -11,14 +11,6 @@ offset_top = 14.0
 offset_right = 348.0
 offset_bottom = 268.0
 
-[node name="Audio" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Audio"
-
-[node name="Volume" type="HSlider" parent="VBoxContainer"]
-layout_mode = 2
-value = 100.0
-
 [node name="Graphics" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Graphics"

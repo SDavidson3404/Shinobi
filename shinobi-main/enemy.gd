@@ -164,6 +164,8 @@ func take_damage(amount: int) -> void:
 		anim_player.stop()
 		anim_player.play("stagger")
 		is_staggered = false
+		await get_tree().create_timer(.5).timeout
+		anim_player.stop()
 	# If health is 0, die
 	if health <= 0: die()
 

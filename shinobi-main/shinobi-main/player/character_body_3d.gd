@@ -132,7 +132,7 @@ func _ready() -> void:
 	add_to_group("player")
 	set_up_weapons()
 	check_unlocks()
-
+	
 # ==========================
 # INPUT
 # ==========================

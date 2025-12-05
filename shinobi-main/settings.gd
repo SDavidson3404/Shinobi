@@ -4,7 +4,6 @@ extends Node2D
 # VARIABLES
 # ====================
 @onready var fullscreen_checkbox: CheckBox = $VBoxContainer/Fullscreen # Checkbox for fullscreen
-@onready var volume_slider: HSlider = $VBoxContainer/Volume # Volume slider
 @onready var resolution_option: OptionButton = $VBoxContainer/Resolution # Options button
 
 # ====================
@@ -21,10 +20,6 @@ func _ready():
 	resolution_option.add_item("1280x720")
 	resolution_option.add_item("800x600")
 	resolution_option.connect("item_selected", Callable(self, "_on_resolution_selected"))
-
-	# Audio setup
-	volume_slider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
-	volume_slider.connect("value_changed", Callable(self, "_on_volume_changed"))
 
 # ====================
 # FULLSCREEN TOGGLED
@@ -46,11 +41,6 @@ func _on_resolution_selected(index: int):
 	# Set window size
 	DisplayServer.window_set_size(Vector2i(int(res[0]), int(res[1])))
 
-# ====================
-# ON VOLUME CHANGED
-# ====================
-# Change volume of main audio server
-func _on_volume_changed(value: float): AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 
 # ====================
 # RETURN TO MENU

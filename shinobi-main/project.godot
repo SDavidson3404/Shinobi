@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://sceneManager.gd"
 SkillManager="*res://Shinobi-main/skills/skill_manager.gd"
+Song="*res://song.tscn"
+SongManager="*res://SongManager.gd"
 
 [input]
 
